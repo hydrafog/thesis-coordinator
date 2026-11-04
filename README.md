@@ -1,4 +1,8 @@
 <div align="center">
+  <img src="assets/banner.png" width="100%" alt="Thesis Coordinator banner">
+</div>
+
+<div align="center">
   <h1>Thesis Coordinator</h1>
   <p><strong>Bachelor thesis supervision and defense management</strong></p>
 
