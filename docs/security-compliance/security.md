@@ -1,5 +1,7 @@
 # Security
 
+These controls are target requirements for the ideal system. The current scaffold does not yet prove that the guards, signed URLs, upload validation, audit events, or retention handlers are operational.
+
 ## Authorization
 
 Authentication identifies the user; server-side authorization decides whether that user may read or mutate a record. Enforce role and ownership checks on every route, server action, background job, and object-storage operation. Never rely on hidden controls or client-provided role fields.

@@ -18,7 +18,7 @@ Install [Lefthook](https://github.com/evilmartians/lefthook) and run `lefthook i
 
 ## Testing priorities
 
-Test role boundaries and ownership rules first. Exercise state transitions such as proposal approval, final submission locking, committee assignment, and grade finalization. Integration tests should cover database constraints and storage adapters; end-to-end tests should cover the critical student and administrator journeys.
+Test role boundaries and ownership rules first. Exercise university-domain authentication, quota-safe proposal approval, final submission locking, committee conflict detection, 20-minute slot assignment, defense-file readiness, and grade finalization. Integration tests should cover database constraints and storage adapters; end-to-end tests should cover student, coordinator, committee, president, secretary, and administrator journeys. The current repository declares the test commands but does not yet contain complete workflow coverage.
 
 ## Documentation
 

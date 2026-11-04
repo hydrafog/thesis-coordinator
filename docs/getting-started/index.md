@@ -3,15 +3,20 @@
 ## Prerequisites
 
 - Git
-- Node.js 22 or the development shell provided by `nix develop`
+- Node.js 22, or the development shell provided by `nix develop`
 - pnpm
 - Docker and Docker Compose, if running PostgreSQL and object storage locally
 
-The application package is managed with pnpm. Copy the documented environment template before starting the development server and keep all credentials local or in a secret manager.
+The application package is managed with pnpm. The repository does not yet include a committed Compose file or environment template, so the commands below describe the target local environment and complete as those artifacts are implemented.
 
 ## Local services
 
-Use PostgreSQL 16 as the application database. Use an S3-compatible object store such as MinIO for thesis uploads, review attachments, and generated defense documents. Keep service data in local volumes and never commit credentials or uploaded files.
+| Service | Version | Purpose |
+|---|---|---|
+| PostgreSQL | 16 | Application database and workflow state |
+| MinIO (S3-compatible) | Current | Profile photos, thesis uploads, review attachments, assignment PDFs, defense minutes |
+
+Keep service data in local volumes. Never commit credentials or uploaded files.
 
 ## Environment configuration
 

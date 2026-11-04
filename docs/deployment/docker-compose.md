@@ -2,7 +2,7 @@
 
 ## Production topology
 
-Use Docker Compose for local or small self-hosted deployments of the Next.js application, PostgreSQL, and MinIO. For public deployments, put the application behind HTTPS and a reverse proxy or managed ingress. Configure SMTP, OAuth, and similarity-check providers through secret-managed environment variables.
+The target deployment uses Docker Compose for local or small self-hosted deployments of the Next.js application, Socket.IO event server, PostgreSQL, and MinIO. Cloudflare Tunnel terminates HTTPS without exposing container ports directly. Google OAuth and the SMTP relay remain external services. The repository does not yet contain the Compose deployment artifact, so this page is target deployment guidance.
 
 ## Release process
 
@@ -10,7 +10,7 @@ Use Docker Compose for local or small self-hosted deployments of the Next.js app
 2. Build an immutable application image or deployment artifact.
 3. Apply compatible database migrations before enabling new application behavior.
 4. Deploy the application with health checks and a rollback path.
-5. Verify authentication, uploads, notifications, and a read-only workflow path.
+5. Verify university-domain authentication, authorized uploads, notification delivery, real-time events, and a read-only workflow path.
 
 Migrations must be backward-compatible across the deployment boundary when rolling deployments are used.
 
