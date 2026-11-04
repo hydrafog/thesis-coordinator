@@ -1,8 +1,8 @@
-# Deployment
+# Docker Compose deployment
 
 ## Production topology
 
-Deploy the Next.js application behind HTTPS and a reverse proxy or managed ingress. Use a managed PostgreSQL 16 instance with encrypted connections and an S3-compatible object store with private buckets. SMTP, OAuth, and similarity-check providers should be configured through secret-managed environment variables.
+Use Docker Compose for local or small self-hosted deployments of the Next.js application, PostgreSQL, and MinIO. For public deployments, put the application behind HTTPS and a reverse proxy or managed ingress. Configure SMTP, OAuth, and similarity-check providers through secret-managed environment variables.
 
 ## Release process
 

@@ -1,4 +1,8 @@
-# Features
+# Features overview
+
+The product supports identity, topic proposals, supervision, messaging, submissions, reviews, similarity checks, defense scheduling, dossier verification, and live grading.
+
+See the feature pages for workflow-specific rules and user responsibilities.
 
 ## Roles
 

@@ -1,4 +1,4 @@
-# Getting started
+# Getting started overview
 
 ## Prerequisites
 
@@ -7,7 +7,7 @@
 - pnpm
 - Docker and Docker Compose, if running PostgreSQL and object storage locally
 
-The repository is currently documentation-first. When the application package is present, install dependencies with the package manager declared by the repository and copy the documented environment template before starting the development server.
+The application package is managed with pnpm. Copy the documented environment template before starting the development server and keep all credentials local or in a secret manager.
 
 ## Local services
 
