@@ -20,6 +20,8 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "export:docs": "python3 scripts/export/export-docs.py",
+    "export:code": "python3 scripts/export/export-code.py",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",

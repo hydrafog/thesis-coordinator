@@ -38,31 +38,31 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Validate repository invariants
-        run: python scripts/validate-repository.py
+        run: python scripts/validation/validate-repository.py
 
       - name: Scan for credentials
-        run: python scripts/validate-secrets.py
+        run: python scripts/validation/validate-secrets.py
 
       - name: Validate source policy
-        run: python scripts/validate-source-policy.py
+        run: python scripts/validation/validate-source-policy.py
 
       - name: Check whitespace errors
         run: git diff --check "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.sha }}"
 
       - name: Check project formatting
-        run: scripts/project-check.sh format
+        run: scripts/project/project-check.sh format
 
       - name: Lint project
-        run: scripts/project-check.sh lint
+        run: scripts/project/project-check.sh lint
 
       - name: Type-check project
-        run: scripts/project-check.sh typecheck
+        run: scripts/project/project-check.sh typecheck
 
       - name: Test project
-        run: scripts/project-check.sh test
+        run: scripts/project/project-check.sh test
 
       - name: Build project
-        run: scripts/project-check.sh build
+        run: scripts/project/project-check.sh build
 
   nix:
     name: Nix flake checks

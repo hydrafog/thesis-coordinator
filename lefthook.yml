@@ -10,44 +10,44 @@ pre-commit:
     whitespace:
       run: git diff --cached --check
     repository:
-      run: python3 scripts/validate-repository.py
+      run: python3 scripts/validation/validate-repository.py
     staged-security:
-      run: python3 scripts/validate-secrets.py --cached
+      run: python3 scripts/validation/validate-secrets.py --cached
     source-policy:
-      run: python3 scripts/validate-source-policy.py
+      run: python3 scripts/validation/validate-source-policy.py
     formatter:
       glob: "**/*.{js,jsx,ts,tsx,json,css,scss,yml,yaml}"
-      run: scripts/project-check.sh format
+      run: scripts/project/project-check.sh format
     lint:
       glob: "**/*.{js,jsx,ts,tsx}"
-      run: scripts/project-check.sh lint
+      run: scripts/project/project-check.sh lint
     typecheck:
       glob: "**/*.{ts,tsx}"
-      run: scripts/project-check.sh typecheck
+      run: scripts/project/project-check.sh typecheck
 
 pre-push:
   parallel: false
   commands:
     repository:
-      run: python3 scripts/validate-repository.py
+      run: python3 scripts/validation/validate-repository.py
     security:
-      run: python3 scripts/validate-secrets.py
+      run: python3 scripts/validation/validate-secrets.py
     source-policy:
-      run: python3 scripts/validate-source-policy.py
+      run: python3 scripts/validation/validate-source-policy.py
     nix:
       run: nix flake check --no-build
     formatter:
-      run: scripts/project-check.sh format
+      run: scripts/project/project-check.sh format
     lint:
-      run: scripts/project-check.sh lint
+      run: scripts/project/project-check.sh lint
     typecheck:
-      run: scripts/project-check.sh typecheck
+      run: scripts/project/project-check.sh typecheck
     tests:
-      run: scripts/project-check.sh test
+      run: scripts/project/project-check.sh test
     build:
-      run: scripts/project-check.sh build
+      run: scripts/project/project-check.sh build
 
 commit-msg:
   commands:
     format:
-      run: python3 scripts/validate-commit-message.py {1}
+      run: python3 scripts/validation/validate-commit-message.py {1}

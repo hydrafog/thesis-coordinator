@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 SOURCE_PATTERN = re.compile(r"^src/.*\.(?:ts|tsx|js|jsx)$")
 FORBIDDEN = (
     (re.compile(r"\bconsole\.(?:log|debug|info|warn|error)\s*\("), "console logging"),
