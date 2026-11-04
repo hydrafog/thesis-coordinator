@@ -14,7 +14,7 @@ Database changes must be delivered as reviewed migrations. Do not edit an applie
 4. Add or update unit, integration, and end-to-end coverage for changed behavior.
 5. Run formatting, linting, type checking, tests, and migration checks before opening a pull request.
 
-Install [Lefthook](https://github.com/evilmartians/lefthook) and run `lefthook install` after cloning. The hooks fail fast on whitespace errors, broken local Markdown links, missing repository invariants, Nix failures, and TypeScript failures once the application package is present. The same repository and Nix checks run in GitHub Actions.
+Install [Lefthook](https://github.com/evilmartians/lefthook) and run `lefthook install` after cloning. The hooks fail fast on whitespace errors, missing repository invariants, Nix failures, and TypeScript failures once the application package is present. The `commit-msg` hook requires a supported prefix, an 80-character maximum subject, and no description body; the standard co-author trailer is allowed. The same repository and Nix checks run in GitHub Actions.
 
 ## Testing priorities
 

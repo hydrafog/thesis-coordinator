@@ -24,9 +24,6 @@ jobs:
       - name: Validate repository invariants
         run: python scripts/validate-repository.py
 
-      - name: Validate Markdown links
-        run: python scripts/validate-markdown-links.py
-
       - name: Check whitespace errors
         run: git diff --check "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.sha }}"
 

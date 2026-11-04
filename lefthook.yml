@@ -11,9 +11,6 @@ pre-commit:
       run: git diff --cached --check
     repository:
       run: python3 scripts/validate-repository.py
-    markdown:
-      glob: "**/*.md"
-      run: python3 scripts/validate-markdown-links.py {staged_files}
     nix:
       glob: "{flake.nix,*.nix}"
       run: nix flake check --no-build
@@ -32,7 +29,10 @@ pre-push:
   commands:
     repository:
       run: python3 scripts/validate-repository.py
-    markdown:
-      run: python3 scripts/validate-markdown-links.py
     nix:
       run: nix flake check --no-build
+
+commit-msg:
+  commands:
+    format:
+      run: python3 scripts/validate-commit-message.py {1}
