@@ -26,8 +26,29 @@ jobs:
       - name: Validate repository invariants
         run: python scripts/validate-repository.py
 
+      - name: Scan for credentials
+        run: python scripts/validate-secrets.py
+
+      - name: Validate source policy
+        run: python scripts/validate-source-policy.py
+
       - name: Check whitespace errors
         run: git diff --check "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.sha }}"
+
+      - name: Check project formatting
+        run: scripts/project-check.sh format
+
+      - name: Lint project
+        run: scripts/project-check.sh lint
+
+      - name: Type-check project
+        run: scripts/project-check.sh typecheck
+
+      - name: Test project
+        run: scripts/project-check.sh test
+
+      - name: Build project
+        run: scripts/project-check.sh build
 
   nix:
     name: Nix flake checks

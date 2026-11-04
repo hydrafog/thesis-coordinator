@@ -11,26 +11,41 @@ pre-commit:
       run: git diff --cached --check
     repository:
       run: python3 scripts/validate-repository.py
-    nix:
-      glob: "{flake.nix,*.nix}"
-      run: nix flake check --no-build
-    typescript:
+    staged-security:
+      run: python3 scripts/validate-secrets.py --cached
+    source-policy:
+      run: python3 scripts/validate-source-policy.py
+    formatter:
+      glob: "**/*.{js,jsx,ts,tsx,json,css,scss,yml,yaml}"
+      run: scripts/project-check.sh format
+    lint:
+      glob: "**/*.{js,jsx,ts,tsx}"
+      run: scripts/project-check.sh lint
+    typecheck:
       glob: "**/*.{ts,tsx}"
-      run: |
-        if [ -f package.json ]; then
-          pnpm exec tsc --noEmit
-        else
-          echo "package.json is required for TypeScript checks" >&2
-          exit 1
-        fi
+      run: scripts/project-check.sh typecheck
 
 pre-push:
   parallel: false
   commands:
     repository:
       run: python3 scripts/validate-repository.py
+    security:
+      run: python3 scripts/validate-secrets.py
+    source-policy:
+      run: python3 scripts/validate-source-policy.py
     nix:
       run: nix flake check --no-build
+    formatter:
+      run: scripts/project-check.sh format
+    lint:
+      run: scripts/project-check.sh lint
+    typecheck:
+      run: scripts/project-check.sh typecheck
+    tests:
+      run: scripts/project-check.sh test
+    build:
+      run: scripts/project-check.sh build
 
 commit-msg:
   commands:
