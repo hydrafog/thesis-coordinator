@@ -19,3 +19,7 @@ minio-data/
 result
 .DS_Store
 exports/
+.agents
+AGENTS.md
+.agents/artifacts/
+__pycache__/
