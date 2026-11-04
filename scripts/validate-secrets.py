@@ -46,7 +46,9 @@ def lines_to_scan(cached: bool) -> list[str]:
     lines: list[str] = []
     for raw_path in result.stdout.split(b"\0"):
         if raw_path:
-            lines.extend(Path(raw_path.decode()).read_text(encoding="utf-8").splitlines())
+            path = Path(raw_path.decode())
+            if path.exists():
+                lines.extend(path.read_text(encoding="utf-8").splitlines())
     return lines
 
 

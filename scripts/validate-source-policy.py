@@ -31,6 +31,8 @@ def tracked_sources() -> list[Path]:
 def main() -> int:
     findings: list[str] = []
     for path in tracked_sources():
+        if not path.exists():
+            continue
         for line_number, line in enumerate(
             path.read_text(encoding="utf-8").splitlines(), start=1
         ):
