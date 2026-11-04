@@ -1,0 +1,19 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# Local services and tooling
+postgres-data/
+minio-data/
+.direnv/
+result
+.DS_Store

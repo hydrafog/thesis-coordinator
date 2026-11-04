@@ -1,0 +1,38 @@
+min_version: 1.7.15
+
+skip_output:
+  - meta
+  - summary
+
+pre-commit:
+  parallel: true
+  commands:
+    whitespace:
+      run: git diff --cached --check
+    repository:
+      run: python3 scripts/validate-repository.py
+    markdown:
+      glob: "**/*.md"
+      run: python3 scripts/validate-markdown-links.py {staged_files}
+    nix:
+      glob: "{flake.nix,*.nix}"
+      run: nix flake check --no-build
+    typescript:
+      glob: "**/*.{ts,tsx}"
+      run: |
+        if [ -f package.json ]; then
+          pnpm exec tsc --noEmit
+        else
+          echo "package.json is required for TypeScript checks" >&2
+          exit 1
+        fi
+
+pre-push:
+  parallel: false
+  commands:
+    repository:
+      run: python3 scripts/validate-repository.py
+    markdown:
+      run: python3 scripts/validate-markdown-links.py
+    nix:
+      run: nix flake check --no-build

@@ -14,6 +14,8 @@ Database changes must be delivered as reviewed migrations. Do not edit an applie
 4. Add or update unit, integration, and end-to-end coverage for changed behavior.
 5. Run formatting, linting, type checking, tests, and migration checks before opening a pull request.
 
+Install [Lefthook](https://github.com/evilmartians/lefthook) and run `lefthook install` after cloning. The hooks fail fast on whitespace errors, broken local Markdown links, missing repository invariants, Nix failures, and TypeScript failures once the application package is present. The same repository and Nix checks run in GitHub Actions.
+
 ## Testing priorities
 
 Test role boundaries and ownership rules first. Exercise state transitions such as proposal approval, final submission locking, committee assignment, and grade finalization. Integration tests should cover database constraints and storage adapters; end-to-end tests should cover the critical student and administrator journeys.
