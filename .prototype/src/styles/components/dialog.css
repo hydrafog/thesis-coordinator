@@ -1,0 +1,60 @@
+.dialog {
+  inset: 0;
+  margin: auto;
+  width: min(100%, var(--dialog-width));
+  max-width: var(--dialog-width);
+  max-height: calc(100% - var(--space-8));
+  overflow-y: auto;
+  padding: 0;
+  border: var(--border-width) solid var(--color-line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-overlay);
+}
+
+.dialog[open] {
+  animation: motion-dialog-enter var(--motion-modal-enter-duration) var(--motion-modal-enter-ease);
+}
+
+.dialog::backdrop {
+  background: var(--color-scrim);
+}
+
+.dialog[open]::backdrop {
+  animation: motion-fade-in var(--motion-blanket-enter-duration) var(--motion-blanket-enter-ease);
+}
+
+.dialog.dialog--leaving {
+  animation: motion-dialog-exit var(--motion-modal-exit-duration) var(--motion-modal-exit-ease) forwards;
+}
+
+.dialog__form {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6);
+}
+
+.dialog__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.dialog__title {
+  font-size: var(--text-heading);
+  line-height: var(--leading-heading);
+}
+
+.dialog__fields {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}

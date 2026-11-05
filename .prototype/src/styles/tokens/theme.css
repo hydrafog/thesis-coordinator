@@ -1,0 +1,130 @@
+:root,
+:root[data-theme-mode="light"] {
+  color-scheme: light;
+
+  --color-canvas: var(--paper-050);
+  --color-surface: var(--paper-000);
+  --color-surface-muted: var(--paper-100);
+  --color-surface-sunken: var(--paper-200);
+  --color-surface-hover: var(--ink-050);
+
+  --color-text: var(--ink-900);
+  --color-text-soft: var(--ink-800);
+  --color-text-muted: var(--ink-600);
+  --color-text-on-accent: var(--tone-white);
+
+  --color-line: var(--ink-100);
+  --color-line-strong: var(--ink-900);
+  --color-line-subtle: var(--ink-200);
+  --color-scrim: rgb(22 36 86 / 0.28);
+  --color-control: var(--ink-900);
+}
+
+:root[data-theme-mode="dark"] {
+  color-scheme: dark;
+
+  --color-canvas: var(--night-100);
+  --color-surface: var(--night-200);
+  --color-surface-muted: var(--night-300);
+  --color-surface-sunken: var(--night-000);
+  --color-surface-hover: rgb(255 255 255 / 0.05);
+
+  --color-text: var(--night-900);
+  --color-text-soft: var(--night-800);
+  --color-text-muted: var(--night-700);
+  --color-text-on-accent: var(--tone-white);
+
+  --color-line: var(--night-400);
+  --color-line-strong: var(--night-600);
+  --color-line-subtle: var(--night-500);
+  --color-scrim: rgb(0 0 0 / 0.6);
+  --color-control: var(--night-500);
+
+  --tone-success-fg: var(--tone-success);
+  --tone-warning-fg: var(--tone-warning);
+  --tone-danger-fg: #f07a6c;
+  --tone-info-fg: var(--night-800);
+}
+
+:root,
+:root[data-accent="vermilion"] {
+  --accent: var(--accent-vermilion);
+  --accent-deep: var(--accent-vermilion-deep);
+  --accent-warm: var(--accent-vermilion-warm);
+  --accent-fill: var(--accent-vermilion-deep);
+}
+
+:root[data-accent="pink"] {
+  --accent: var(--accent-pink);
+  --accent-deep: var(--accent-pink-deep);
+  --accent-warm: var(--accent-pink-warm);
+  --accent-fill: var(--accent-pink-deep);
+}
+
+:root[data-accent="teal"] {
+  --accent: var(--accent-teal);
+  --accent-deep: var(--accent-teal-deep);
+  --accent-warm: var(--accent-teal-warm);
+  --accent-fill: var(--accent-teal-deep);
+}
+
+:root[data-accent="amber"] {
+  --accent: var(--accent-amber);
+  --accent-deep: var(--accent-amber-deep);
+  --accent-warm: var(--accent-amber-warm);
+  --accent-fill: var(--accent-amber-deep);
+}
+
+:root[data-accent="violet"] {
+  --accent: var(--accent-violet);
+  --accent-deep: var(--accent-violet-deep);
+  --accent-warm: var(--accent-violet-warm);
+  --accent-fill: var(--accent-violet-deep);
+}
+
+:root {
+  --color-focus: var(--accent);
+  --color-accent-tint: color-mix(in srgb, var(--accent) 12%, transparent);
+  --color-accent-tint-strong: color-mix(in srgb, var(--accent) 22%, transparent);
+
+  --tone-success-bg: color-mix(in srgb, var(--tone-success) 14%, var(--color-surface));
+  --tone-success-fg: var(--tone-success-deep);
+  --tone-warning-bg: color-mix(in srgb, var(--tone-warning) 16%, var(--color-surface));
+  --tone-warning-fg: var(--tone-warning-deep);
+  --tone-danger-bg: color-mix(in srgb, var(--tone-danger) 14%, var(--color-surface));
+  --tone-danger-fg: var(--tone-danger);
+  --tone-info-bg: color-mix(in srgb, var(--tone-info) 12%, var(--color-surface));
+  --tone-info-fg: var(--tone-info);
+  --tone-neutral-bg: var(--color-surface-muted);
+  --tone-neutral-fg: var(--color-text-muted);
+}
+
+.swatch[data-accent="vermilion"] {
+  --swatch-1: var(--accent-vermilion);
+  --swatch-2: var(--accent-vermilion-deep);
+  --swatch-3: var(--accent-vermilion-warm);
+}
+
+.swatch[data-accent="pink"] {
+  --swatch-1: var(--accent-pink);
+  --swatch-2: var(--accent-pink-deep);
+  --swatch-3: var(--accent-pink-warm);
+}
+
+.swatch[data-accent="teal"] {
+  --swatch-1: var(--accent-teal);
+  --swatch-2: var(--accent-teal-deep);
+  --swatch-3: var(--accent-teal-warm);
+}
+
+.swatch[data-accent="amber"] {
+  --swatch-1: var(--accent-amber);
+  --swatch-2: var(--accent-amber-deep);
+  --swatch-3: var(--accent-amber-warm);
+}
+
+.swatch[data-accent="violet"] {
+  --swatch-1: var(--accent-violet);
+  --swatch-2: var(--accent-violet-deep);
+  --swatch-3: var(--accent-violet-warm);
+}
