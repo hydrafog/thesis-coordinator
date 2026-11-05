@@ -1,0 +1,41 @@
+.person {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.person__avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-tint-strong);
+  color: var(--color-text);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-bold);
+}
+
+.person__copy {
+  display: grid;
+  min-width: 0;
+}
+
+.person__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-description);
+  font-weight: var(--weight-semibold);
+}
+
+.person__sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}

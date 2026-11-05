@@ -14,9 +14,10 @@
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color var(--motion-button-duration) var(--motion-button-ease),
-              border-color var(--motion-button-duration) var(--motion-button-ease),
-              color var(--motion-button-duration) var(--motion-button-ease);
+  transition:
+    background-color var(--motion-button-duration) var(--motion-button-ease),
+    border-color var(--motion-button-duration) var(--motion-button-ease),
+    color var(--motion-button-duration) var(--motion-button-ease);
 }
 
 .btn:hover:not(:disabled) {
@@ -93,9 +94,10 @@
   border-radius: var(--radius-md);
   color: var(--color-text);
   font: inherit;
-  transition: border-color var(--motion-duration-short) var(--motion-ease-out-subtle),
-              background-color var(--motion-duration-short) var(--motion-ease-out-subtle),
-              box-shadow var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition:
+    border-color var(--motion-duration-short) var(--motion-ease-out-subtle),
+    background-color var(--motion-duration-short) var(--motion-ease-out-subtle),
+    box-shadow var(--motion-duration-short) var(--motion-ease-out-subtle);
 }
 
 .textarea {
@@ -143,9 +145,10 @@
   font: inherit;
   font-size: var(--text-description);
   cursor: pointer;
-  transition: background-color var(--motion-tab-duration) var(--motion-tab-ease),
-              border-color var(--motion-tab-duration) var(--motion-tab-ease),
-              color var(--motion-tab-duration) var(--motion-tab-ease);
+  transition:
+    background-color var(--motion-tab-duration) var(--motion-tab-ease),
+    border-color var(--motion-tab-duration) var(--motion-tab-ease),
+    color var(--motion-tab-duration) var(--motion-tab-ease);
 }
 
 .tab:hover:not([aria-pressed="true"]) {
@@ -190,9 +193,10 @@
   font-size: var(--text-description);
   font-weight: var(--weight-semibold);
   cursor: pointer;
-  transition: background-color var(--motion-tab-duration) var(--motion-tab-ease),
-              border-color var(--motion-tab-duration) var(--motion-tab-ease),
-              color var(--motion-tab-duration) var(--motion-tab-ease);
+  transition:
+    background-color var(--motion-tab-duration) var(--motion-tab-ease),
+    border-color var(--motion-tab-duration) var(--motion-tab-ease),
+    color var(--motion-tab-duration) var(--motion-tab-ease);
 }
 
 .choice:hover .choice__label {
@@ -219,7 +223,8 @@
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   cursor: pointer;
-  transition: border-color var(--motion-duration-xshort) var(--motion-ease-out-subtle);
+  transition: border-color var(--motion-duration-xshort)
+    var(--motion-ease-out-subtle);
 }
 
 .swatch-card:hover {

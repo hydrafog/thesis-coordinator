@@ -1,5 +1,7 @@
 :root {
-  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:
+    "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
 
   --text-display: 2.5rem;
   --text-title: 1.75rem;
@@ -60,7 +62,10 @@
   --date-chip-size: 3.5rem;
   --dialog-width: 32rem;
   --chat-list-width: 17rem;
-  --chat-height: calc(var(--viewport-height) / var(--site-zoom) - var(--header-height) - var(--space-8) * 2);
+  --chat-height: calc(
+    var(--viewport-height) / var(--site-zoom) - var(--header-height) -
+      var(--space-8) * 2
+  );
   --icon-size: 1.25rem;
   --icon-size-sm: 1rem;
   --avatar-size: 2.25rem;

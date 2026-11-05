@@ -14,7 +14,8 @@ export function navMarkup(role, currentPage) {
     .map((group) => {
       const items = group.items
         .map((item) => {
-          const current = item.key === currentPage ? ' aria-current="page"' : "";
+          const current =
+            item.key === currentPage ? ' aria-current="page"' : "";
           return `<li><a class="nav-link" href="#${esc(item.key)}" data-action="go" data-id="${esc(item.key)}"${current}>${icon(item.icon, true)}<span>${esc(item.label)}</span></a></li>`;
         })
         .join("");
@@ -39,7 +40,15 @@ export function accountMarkup({ name, role }) {
 
 export function topbarMarkup({ page, query, searchable }) {
   const title = PAGE_TITLES[page] ?? PAGE_TITLES.overview;
-  const toggle = button({ label: "Open navigation", action: "toggle-nav", variant: "btn--ghost nav-toggle", size: "btn--icon", iconOnly: true, icon: icon("i-menu-line"), attrs: 'aria-controls="app-sidebar" aria-expanded="false"' });
+  const toggle = button({
+    label: "Open navigation",
+    action: "toggle-nav",
+    variant: "btn--ghost nav-toggle",
+    size: "btn--icon",
+    iconOnly: true,
+    icon: icon("i-menu-line"),
+    attrs: 'aria-controls="app-sidebar" aria-expanded="false"',
+  });
   const search = searchable
     ? `<div class="search" role="search"><label class="sr-only" for="global-search">Search this page</label><input id="global-search" type="search" data-input="search" value="${esc(query)}" placeholder="Search ${esc(title.toLowerCase())}" autocomplete="off"></div>`
     : "";

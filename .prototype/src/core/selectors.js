@@ -1,18 +1,27 @@
 import { COORDINATOR_NAME, STUDENT_NAME } from "../config/constants.js";
 
 const OPEN_STATUSES = Object.freeze(["submitted", "changes-requested"]);
-const TOPIC_STATUSES = Object.freeze(["draft", "submitted", "approved", "changes-requested"]);
+const TOPIC_STATUSES = Object.freeze([
+  "draft",
+  "submitted",
+  "approved",
+  "changes-requested",
+]);
 
 export function coordinatorByName(state, name) {
   return state.coordinators.find((coordinator) => coordinator.name === name);
 }
 
 export function proposalsOf(state, coordinatorName) {
-  return state.proposals.filter((proposal) => proposal.coordinator === coordinatorName);
+  return state.proposals.filter(
+    (proposal) => proposal.coordinator === coordinatorName,
+  );
 }
 
 export function approvedProposalsOf(state, coordinatorName) {
-  return proposalsOf(state, coordinatorName).filter((proposal) => proposal.status === "approved");
+  return proposalsOf(state, coordinatorName).filter(
+    (proposal) => proposal.status === "approved",
+  );
 }
 
 export function usedPlaces(state, coordinatorName) {
@@ -30,19 +39,29 @@ export function freePlaces(state, coordinatorName) {
 }
 
 export function awaitingDecision(state, coordinatorName) {
-  return proposalsOf(state, coordinatorName).filter((proposal) => OPEN_STATUSES.includes(proposal.status));
+  return proposalsOf(state, coordinatorName).filter((proposal) =>
+    OPEN_STATUSES.includes(proposal.status),
+  );
 }
 
 export function activeTopicOf(state, studentName = STUDENT_NAME) {
   return state.proposals.find(
-    (proposal) => proposal.student === studentName && TOPIC_STATUSES.includes(proposal.status),
+    (proposal) =>
+      proposal.student === studentName &&
+      TOPIC_STATUSES.includes(proposal.status),
   );
 }
 
-export function isSupervisedBy(state, studentName, coordinatorName = COORDINATOR_NAME) {
+export function isSupervisedBy(
+  state,
+  studentName,
+  coordinatorName = COORDINATOR_NAME,
+) {
   return state.proposals.some(
     (proposal) =>
-      proposal.student === studentName && proposal.coordinator === coordinatorName && proposal.status === "approved",
+      proposal.student === studentName &&
+      proposal.coordinator === coordinatorName &&
+      proposal.status === "approved",
   );
 }
 
@@ -51,21 +70,30 @@ export function supervisedStudents(state, coordinatorName = COORDINATOR_NAME) {
 }
 
 export function milestonesOf(state, studentName) {
-  return state.milestones.filter((milestone) => milestone.student === studentName);
+  return state.milestones.filter(
+    (milestone) => milestone.student === studentName,
+  );
 }
 
 export function openMilestonesByDue(state, studentNames) {
   return state.milestones
-    .filter((milestone) => !milestone.done && studentNames.includes(milestone.student))
+    .filter(
+      (milestone) =>
+        !milestone.done && studentNames.includes(milestone.student),
+    )
     .sort((a, b) => a.due.localeCompare(b.due));
 }
 
 export function slotsOf(state, studentName) {
-  return studentName ? state.slots.filter((slot) => slot.student === studentName) : state.slots;
+  return studentName
+    ? state.slots.filter((slot) => slot.student === studentName)
+    : state.slots;
 }
 
 export function sortedSlots(slots) {
-  return [...slots].sort((a, b) => `${a.day} ${a.time}`.localeCompare(`${b.day} ${b.time}`));
+  return [...slots].sort((a, b) =>
+    `${a.day} ${a.time}`.localeCompare(`${b.day} ${b.time}`),
+  );
 }
 
 export function messagesWith(state, studentName) {

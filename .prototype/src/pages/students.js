@@ -40,7 +40,16 @@ const ACTIVITY_TEXT = Object.freeze({
 function decisionCell(proposal) {
   if (["submitted", "changes-requested"].includes(proposal.status)) {
     const decide = (label, decision, iconId) =>
-      button({ label, action: "decide", id: proposal.id, variant: "btn--ghost", size: "btn--icon btn--sm", iconOnly: true, icon: icon(iconId, true), attrs: `data-decision="${decision}"` });
+      button({
+        label,
+        action: "decide",
+        id: proposal.id,
+        variant: "btn--ghost",
+        size: "btn--icon btn--sm",
+        iconOnly: true,
+        icon: icon(iconId, true),
+        attrs: `data-decision="${decision}"`,
+      });
     return `<div class="table__actions">${decide("Approve", "approved", "i-check-circle-line")}${decide("Request changes", "changes-requested", "i-chat-1-line")}${decide("Reject", "rejected", "i-close-line")}</div>`;
   }
   if (proposal.status === "approved") {
@@ -52,7 +61,10 @@ function decisionCell(proposal) {
 function rowFor(state, proposal) {
   const milestones = milestonesOf(state, proposal.student);
   const done = milestones.filter((item) => item.done).length;
-  const progress = proposal.status === "approved" && milestones.length ? `${done} of ${milestones.length}` : "—";
+  const progress =
+    proposal.status === "approved" && milestones.length
+      ? `${done} of ${milestones.length}`
+      : "—";
   return `<tr><td>${esc(proposal.student)}</td><td class="table__topic" title="${esc(proposal.description)}">${esc(proposal.title)}</td><td>${badge(proposal.status)}</td><td class="num">${esc(progress)}</td><td>${decisionCell(proposal)}</td></tr>`;
 }
 
@@ -63,7 +75,11 @@ export function renderStudents({ state, collapsed, ui }) {
   const visible = all.filter(
     (proposal) =>
       (ui.proposalFilter === "all" || proposal.status === ui.proposalFilter) &&
-      matchesQuery(ui.query, [proposal.student, proposal.title, proposal.status]),
+      matchesQuery(ui.query, [
+        proposal.student,
+        proposal.title,
+        proposal.status,
+      ]),
   );
   const tabs = FILTERS.map(
     (filter) =>
@@ -71,18 +87,31 @@ export function renderStudents({ state, collapsed, ui }) {
   ).join("");
   const table = visible.length
     ? `<div class="table-wrap"><table class="table"><thead><tr><th scope="col">Student</th><th scope="col">Topic</th><th scope="col">Status</th><th scope="col">Milestones</th><th scope="col">Decision</th></tr></thead><tbody>${visible.map((proposal) => rowFor(state, proposal)).join("")}</tbody></table></div>`
-    : emptyState({ title: "No students match this filter", text: "Choose another filter or clear the search." });
+    : emptyState({
+        title: "No students match this filter",
+        text: "Choose another filter or clear the search.",
+      });
   const events = [...all]
     .sort((a, b) => b.updated.localeCompare(a.updated))
     .slice(0, 4)
-    .map((proposal) => `<div class="activity__item"><span class="activity__text"><strong>${esc(proposal.student)}</strong>, ${esc(ACTIVITY_TEXT[proposal.status] ?? proposal.status)}</span><span class="activity__time">${esc(formatLongDate(proposal.updated))}</span></div>`)
+    .map(
+      (proposal) =>
+        `<div class="activity__item"><span class="activity__text"><strong>${esc(proposal.student)}</strong>, ${esc(ACTIVITY_TEXT[proposal.status] ?? proposal.status)}</span><span class="activity__time">${esc(formatLongDate(proposal.updated))}</span></div>`,
+    )
     .join("");
-  const activity = events ? `<div class="activity">${events}</div>` : railEmpty("No student activity.");
-  const supervised = all.filter((proposal) => proposal.status === "approved").map((proposal) => proposal.student);
+  const activity = events
+    ? `<div class="activity">${events}</div>`
+    : railEmpty("No student activity.");
+  const supervised = all
+    .filter((proposal) => proposal.status === "approved")
+    .map((proposal) => proposal.student);
   const due = openMilestonesByDue(state, supervised).slice(0, 4);
   const deadlines = due.length
     ? `<div class="records">${due
-        .map((item) => `<div class="record record--dated"><div class="record__main"><span class="person__name">${esc(item.name)}</span></div>${dateChip(item.due)}</div>`)
+        .map(
+          (item) =>
+            `<div class="record record--dated"><div class="record__main"><span class="person__name">${esc(item.name)}</span></div>${dateChip(item.due)}</div>`,
+        )
         .join("")}</div>`
     : "";
   return `<div class="stack"><div class="tabs" role="group" aria-label="Filter students">${tabs}</div><div class="workspace"><section class="card workspace__main"><div class="metrics">${metric({ label: "Awaiting decision", value: awaitingDecision(state, COORDINATOR_NAME).length })}${metric({ label: "Supervised", value: used, unit: `of ${coordinator.quota}`, meter: placesMeter(used, coordinator.quota) })}${metric({ label: "Open places", value: freePlaces(state, COORDINATOR_NAME) })}</div><section class="section">${sectionHeading("Students", `<span class="section__count">${visible.length} ${visible.length === 1 ? "student" : "students"}</span>`)}${table}</section></section><aside class="workspace__rail">${panel({ id: "activity", title: "Activity", collapsed: collapsed.includes("activity"), body: activity })}${panel({ id: "student-deadlines", title: "Deadlines", collapsed: collapsed.includes("student-deadlines"), body: deadlines || railEmpty("Milestones appear here once a student is supervised.") })}</aside></div></div>`;

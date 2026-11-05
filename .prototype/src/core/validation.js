@@ -5,15 +5,23 @@ export function isGrade(value) {
     return false;
   }
   const number = Number(value);
-  return Number.isFinite(number) && number >= LIMITS.gradeMin && number <= LIMITS.gradeMax;
+  return (
+    Number.isFinite(number) &&
+    number >= LIMITS.gradeMin &&
+    number <= LIMITS.gradeMax
+  );
 }
 
 export function cleanText(value, maxLength) {
-  return String(value ?? "").trim().slice(0, maxLength);
+  return String(value ?? "")
+    .trim()
+    .slice(0, maxLength);
 }
 
 export function safeFileName(name) {
-  const base = String(name ?? "").split(/[\\/]/).pop();
+  const base = String(name ?? "")
+    .split(/[\\/]/)
+    .pop();
   return base.replace(/[\u0000-\u001f]/g, "").slice(0, LIMITS.topicTitle);
 }
 
@@ -21,6 +29,11 @@ export function isAllowedUpload(file) {
   if (!file) {
     return false;
   }
-  const extension = String(file.name ?? "").split(".").pop().toLowerCase();
-  return UPLOAD_EXTENSIONS.includes(extension) && file.size <= LIMITS.uploadBytes;
+  const extension = String(file.name ?? "")
+    .split(".")
+    .pop()
+    .toLowerCase();
+  return (
+    UPLOAD_EXTENSIONS.includes(extension) && file.size <= LIMITS.uploadBytes
+  );
 }

@@ -1,7 +1,11 @@
 import { LIMITS, STUDENT_NAME } from "../config/constants.js";
 import { cleanText } from "../core/validation.js";
 import { todayIso } from "../core/format.js";
-import { activeTopicOf, coordinatorByName, freePlaces } from "../core/selectors.js";
+import {
+  activeTopicOf,
+  coordinatorByName,
+  freePlaces,
+} from "../core/selectors.js";
 
 const OPEN = Object.freeze(["submitted", "changes-requested"]);
 
@@ -41,7 +45,10 @@ export function proposeTopic(state, values) {
 export function reviseTopic(state, id, values) {
   const proposal = state.proposals.find((item) => item.id === id);
   if (!proposal || proposal.status !== "changes-requested") {
-    return { changed: false, message: "This proposal has no requested changes." };
+    return {
+      changed: false,
+      message: "This proposal has no requested changes.",
+    };
   }
   const topic = readTopic(values);
   if (!topic) {

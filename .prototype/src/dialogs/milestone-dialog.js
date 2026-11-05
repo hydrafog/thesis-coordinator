@@ -9,7 +9,9 @@ export function milestoneDialogMarkup() {
 
 export function openMilestoneDialog(studentNames) {
   const select = globalThis.document.getElementById("milestone-student");
-  select.innerHTML = studentNames.map((name) => `<option>${esc(name)}</option>`).join("");
+  select.innerHTML = studentNames
+    .map((name) => `<option>${esc(name)}</option>`)
+    .join("");
   globalThis.document.querySelector("#milestone-dialog form").reset();
   openDialog("milestone-dialog", "milestone-name");
 }

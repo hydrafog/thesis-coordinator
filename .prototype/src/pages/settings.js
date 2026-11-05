@@ -1,4 +1,10 @@
-import { ACCENTS, PAGE_TITLES, ROLES, THEME_MODES, ZOOM_PRESETS } from "../config/constants.js";
+import {
+  ACCENTS,
+  PAGE_TITLES,
+  ROLES,
+  THEME_MODES,
+  ZOOM_PRESETS,
+} from "../config/constants.js";
 import { esc } from "../core/html.js";
 import { pagesFor } from "../core/router.js";
 import { panel } from "../components/panel.js";
@@ -38,7 +44,10 @@ export function renderSettings({ state, collapsed }) {
   const preference = state.preferences[state.role];
   const pages = pagesFor(state.role);
   const pageOptions = pages
-    .map((key) => `<option value="${esc(key)}"${preference.defaultPage === key ? " selected" : ""}>${esc(PAGE_TITLES[key])}</option>`)
+    .map(
+      (key) =>
+        `<option value="${esc(key)}"${preference.defaultPage === key ? " selected" : ""}>${esc(PAGE_TITLES[key])}</option>`,
+    )
     .join("");
   const { themeMode, accent, zoom } = state.appearance;
   const form = `<form class="card form-grid" data-submit="settings" novalidate>${sectionHeading("Preferences")}<div class="setting"><div class="setting__label"><label class="field__label" for="display-name">Display name</label></div><div class="setting__control"><input class="input" id="display-name" name="displayName" required maxlength="60" value="${esc(preference.name)}"></div></div><div class="setting"><div class="setting__label"><label class="field__label" for="default-page">Start page</label></div><div class="setting__control"><select class="select" id="default-page" name="defaultPage">${pageOptions}</select></div></div><div class="setting"><div class="setting__label"><strong>Updates</strong></div><div class="setting__control"><label class="choice"><input type="checkbox" name="alerts" value="on"${preference.alerts ? " checked" : ""}><span class="choice__label">Show status notifications</span></label></div></div><div class="setting"><div class="setting__label"><strong>Theme</strong><span class="muted">Light or dark appearance</span></div><div class="setting__control"><div class="choice-group" role="radiogroup" aria-label="Theme">${themeChoices(themeMode)}</div></div></div><div class="setting"><div class="setting__label"><strong>Color palette</strong><span class="muted">Ink accent for buttons, marks, and focus</span></div><div class="setting__control"><div class="choice-group" role="radiogroup" aria-label="Color palette">${accentChoices(accent)}</div></div></div><div class="setting"><div class="setting__label"><strong>Scale and zoom</strong><span class="muted">Magnification of the whole site</span></div><div class="setting__control"><div class="choice-group" role="radiogroup" aria-label="Website scale">${zoomChoices(zoom)}</div></div></div><div class="cluster"><button class="btn btn--primary" type="submit">Save changes</button><span class="muted" role="status" id="settings-feedback"></span></div></form>`;

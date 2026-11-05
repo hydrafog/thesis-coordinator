@@ -12,8 +12,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle),
-              color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition:
+    background-color var(--motion-duration-short) var(--motion-ease-out-subtle),
+    color var(--motion-duration-short) var(--motion-ease-out-subtle);
 }
 
 .badge[data-tone="success"] {
@@ -83,7 +84,8 @@
   height: var(--space-4);
   border-radius: var(--radius-sm);
   background: var(--color-surface-sunken);
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .places__mark[data-filled="true"] {

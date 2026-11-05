@@ -1,7 +1,9 @@
 import { DEFAULT_PAGE, NAVIGATION } from "../config/navigation.js";
 
 export function pagesFor(role) {
-  return NAVIGATION[role].flatMap((group) => group.items.map((item) => item.key));
+  return NAVIGATION[role].flatMap((group) =>
+    group.items.map((item) => item.key),
+  );
 }
 
 export function resolvePage(requested, role, fallback) {

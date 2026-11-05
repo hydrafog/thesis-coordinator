@@ -1,11 +1,20 @@
 export const STORAGE_KEY = "prototype-v2.role-aware.v1";
 
-export const ROLES = Object.freeze({ coordinator: "coordinator", student: "student" });
+export const ROLES = Object.freeze({
+  coordinator: "coordinator",
+  student: "student",
+});
 
 export const ZOOM_PRESETS = Object.freeze(["125", "140", "155"]);
 export const DEFAULT_ZOOM = "140";
 
-export const ACCENTS = Object.freeze(["vermilion", "pink", "teal", "amber", "violet"]);
+export const ACCENTS = Object.freeze([
+  "vermilion",
+  "pink",
+  "teal",
+  "amber",
+  "violet",
+]);
 export const DEFAULT_ACCENT = "vermilion";
 
 export const THEME_MODES = Object.freeze(["light", "dark"]);
@@ -53,4 +62,8 @@ export const PAGE_TITLES = Object.freeze({
   "my-thesis": "My thesis",
 });
 
-export const SEARCHABLE_PAGES = Object.freeze(["students", "coordinators", "schedule"]);
+export const SEARCHABLE_PAGES = Object.freeze([
+  "students",
+  "coordinators",
+  "schedule",
+]);

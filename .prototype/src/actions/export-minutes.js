@@ -5,7 +5,10 @@ import { gradeRecord } from "../core/selectors.js";
 export function exportMinutes(state, student) {
   const record = gradeRecord(state, student);
   if (!record.closed) {
-    return { changed: false, message: "Close grading before exporting minutes." };
+    return {
+      changed: false,
+      message: "Close grading before exporting minutes.",
+    };
   }
   const lines = [
     "THESIS DEFENSE MINUTES",
@@ -13,13 +16,18 @@ export function exportMinutes(state, student) {
     "Committee A",
     `Date: ${formatLongDate(todayIso())}`,
     "",
-    ...COMMITTEE_MEMBERS.map((member, index) => `${member}: ${Number(record.values[index]).toFixed(2)}`),
+    ...COMMITTEE_MEMBERS.map(
+      (member, index) =>
+        `${member}: ${Number(record.values[index]).toFixed(2)}`,
+    ),
     "",
     `Final average: ${averageGrade(record.values)}`,
     "Status: finalized",
     "",
   ];
-  const url = globalThis.URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/plain" }));
+  const url = globalThis.URL.createObjectURL(
+    new Blob([lines.join("\n")], { type: "text/plain" }),
+  );
   const anchor = globalThis.document.createElement("a");
   anchor.href = url;
   anchor.download = `defense-minutes-${student.toLowerCase().replace(/\W+/g, "-")}.txt`;

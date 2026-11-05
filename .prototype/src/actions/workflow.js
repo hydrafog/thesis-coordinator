@@ -1,5 +1,9 @@
 import { LIMITS, UPLOAD_EXTENSIONS } from "../config/constants.js";
-import { cleanText, isAllowedUpload, safeFileName } from "../core/validation.js";
+import {
+  cleanText,
+  isAllowedUpload,
+  safeFileName,
+} from "../core/validation.js";
 import { todayIso } from "../core/format.js";
 import { isSupervisedBy } from "../core/selectors.js";
 
@@ -10,7 +14,10 @@ export function addMilestone(state, values) {
   const name = cleanText(values.name, LIMITS.milestoneName);
   const due = String(values.due ?? "");
   if (!name || !DATE_PATTERN.test(due)) {
-    return { changed: false, message: "Enter a milestone name and a deadline." };
+    return {
+      changed: false,
+      message: "Enter a milestone name and a deadline.",
+    };
   }
   if (!isSupervisedBy(state, values.student)) {
     return { changed: false, message: "Choose a supervised student." };
@@ -32,7 +39,12 @@ export function toggleMilestone(state, id) {
     return { changed: false, message: "" };
   }
   milestone.done = !milestone.done;
-  return { changed: true, message: milestone.done ? "Milestone marked complete." : "Milestone reopened." };
+  return {
+    changed: true,
+    message: milestone.done
+      ? "Milestone marked complete."
+      : "Milestone reopened.",
+  };
 }
 
 export function recordMilestoneUpload(state, id, file) {
@@ -41,18 +53,30 @@ export function recordMilestoneUpload(state, id, file) {
     return { changed: false, message: "" };
   }
   if (!isAllowedUpload(file)) {
-    return { changed: false, message: `Only ${UPLOAD_EXTENSIONS.join(" and ").toUpperCase()} files up to 50 MB are accepted.` };
+    return {
+      changed: false,
+      message: `Only ${UPLOAD_EXTENSIONS.join(" and ").toUpperCase()} files up to 50 MB are accepted.`,
+    };
   }
   milestone.version = `${safeFileName(file.name)}, ${todayIso()}`;
-  return { changed: true, message: "File name recorded on this device. Nothing was uploaded." };
+  return {
+    changed: true,
+    message: "File name recorded on this device. Nothing was uploaded.",
+  };
 }
 
 export function recordFinalUpload(state, student, file) {
   if (!file || !/\.pdf$/i.test(file.name) || file.size > LIMITS.uploadBytes) {
     return { changed: false, message: "Select a PDF file up to 50 MB." };
   }
-  state.documents[student] = { ...(state.documents[student] ?? {}), final: safeFileName(file.name) };
-  return { changed: true, message: "Thesis file name recorded on this device. Nothing was uploaded." };
+  state.documents[student] = {
+    ...(state.documents[student] ?? {}),
+    final: safeFileName(file.name),
+  };
+  return {
+    changed: true,
+    message: "Thesis file name recorded on this device. Nothing was uploaded.",
+  };
 }
 
 export function saveReview(state, values) {

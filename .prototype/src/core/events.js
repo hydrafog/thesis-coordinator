@@ -10,7 +10,10 @@ export function bindEvents(dispatch) {
 
   for (const { type, attribute } of DELEGATED) {
     doc.addEventListener(type, (event) => {
-      const element = event.target instanceof Element ? event.target.closest(`[data-${attribute}]`) : null;
+      const element =
+        event.target instanceof Element
+          ? event.target.closest(`[data-${attribute}]`)
+          : null;
       if (element) {
         dispatch(attribute, element.dataset[attribute], element, event);
       }

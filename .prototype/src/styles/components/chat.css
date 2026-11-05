@@ -26,7 +26,8 @@
   background: var(--color-surface);
   text-align: start;
   cursor: pointer;
-  transition: background-color var(--motion-duration-xshort) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-xshort)
+    var(--motion-ease-out-subtle);
 }
 
 .chat__thread:hover:not([aria-pressed="true"]) {

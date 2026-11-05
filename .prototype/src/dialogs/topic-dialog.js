@@ -11,8 +11,12 @@ export function openTopicDialog({ coordinator, proposal = null }) {
   const form = doc.querySelector("#topic-dialog form");
   form.reset();
   form.dataset.editId = proposal ? proposal.id : "";
-  doc.getElementById("topic-title").textContent = proposal ? "Revise topic proposal" : "Propose a thesis topic";
-  doc.getElementById("topic-submit").textContent = proposal ? "Resubmit proposal" : "Send proposal";
+  doc.getElementById("topic-title").textContent = proposal
+    ? "Revise topic proposal"
+    : "Propose a thesis topic";
+  doc.getElementById("topic-submit").textContent = proposal
+    ? "Resubmit proposal"
+    : "Send proposal";
   doc.getElementById("topic-coordinator").value = coordinator;
   if (proposal) {
     form.elements.title.value = proposal.title;
@@ -22,4 +26,3 @@ export function openTopicDialog({ coordinator, proposal = null }) {
   }
   openDialog("topic-dialog", "topic-name");
 }
-

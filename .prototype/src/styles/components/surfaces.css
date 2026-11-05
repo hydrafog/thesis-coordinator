@@ -82,7 +82,8 @@
 }
 
 .panel__head .icon {
-  transition: transform var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: transform var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .panel[data-collapsed="true"] .panel__head .icon {

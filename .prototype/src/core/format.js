@@ -1,7 +1,14 @@
 import { isGrade } from "./validation.js";
 
-const LONG_DATE = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" });
-const SHORT_DATE = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" });
+const LONG_DATE = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
+const SHORT_DATE = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+});
 const WEEKDAY = new Intl.DateTimeFormat("en-GB", { weekday: "long" });
 const DAY = new Intl.DateTimeFormat("en-GB", { day: "numeric" });
 const MONTH = new Intl.DateTimeFormat("en-GB", { month: "short" });

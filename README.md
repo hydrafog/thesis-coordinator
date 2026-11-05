@@ -71,6 +71,7 @@ Thesis Coordinator consolidates topic proposals, draft reviews, similarity check
 |----------|-------------|
 | [Overview](docs/development/index.md) | Contribution and engineering conventions |
 | [Coding Style](docs/development/coding-style.md) | TypeScript, Next.js, and Prisma conventions |
+| [Design System](docs/development/design.md) | Centralized CSS tokens, component primitives, and theming |
 | [Testing](docs/development/testing.md) | Unit, integration, and end-to-end tests |
 | [Project Structure](docs/development/project-structure.md) | Directory layout and module boundaries |
 | [Team Responsibilities](docs/development/team-responsibilities.md) | Scope split across three developers |

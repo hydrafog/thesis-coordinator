@@ -1,4 +1,9 @@
-import { CANDIDATE_STUDENTS, COMMITTEE_MEMBERS, ROLES, STUDENT_NAME } from "../config/constants.js";
+import {
+  CANDIDATE_STUDENTS,
+  COMMITTEE_MEMBERS,
+  ROLES,
+  STUDENT_NAME,
+} from "../config/constants.js";
 import { esc } from "../core/html.js";
 import { averageGrade, formatShortDate } from "../core/format.js";
 import { gradeRecord } from "../core/selectors.js";
@@ -31,10 +36,19 @@ export function renderGradebook({ state, collapsed, ui }) {
     const value = record.values[index] ?? "";
     return `<div class="grades__row">${person(name, index === 0 ? "President" : "Committee member")}<div class="field"><label class="field__label" for="grade-member-${index}">Grade</label><input class="input" id="grade-member-${index}" type="number" min="1" max="10" step="0.01" value="${esc(value)}" data-change="grade-input" data-index="${index}"${record.closed ? " disabled" : ""}></div></div>`;
   }).join("");
-  const studentOptions = CANDIDATE_STUDENTS.map((name) => `<option${name === student ? " selected" : ""}>${esc(name)}</option>`).join("");
+  const studentOptions = CANDIDATE_STUDENTS.map(
+    (name) =>
+      `<option${name === student ? " selected" : ""}>${esc(name)}</option>`,
+  ).join("");
   const closeButton = record.closed
     ? `<p class="muted">Grades locked</p>${button({ label: "Export minutes", action: "export-minutes", id: student, variant: "btn--sm" })}`
-    : button({ label: "Close grading", action: "close-grading", id: student, variant: "btn--primary", disabled: valid !== COMMITTEE_MEMBERS.length });
+    : button({
+        label: "Close grading",
+        action: "close-grading",
+        id: student,
+        variant: "btn--primary",
+        disabled: valid !== COMMITTEE_MEMBERS.length,
+      });
   const average = `<p class="grades__result grades__result--small num" id="grade-average">${esc(averageGrade(record.values))}</p><p class="muted">${record.closed ? "Finalized" : "Three grades required"}</p>`;
   const details = topic
     ? `<div class="kv"><div class="kv__row"><span class="kv__key">Topic</span><span class="kv__value">${esc(topic.title)}</span></div><div class="kv__row"><span class="kv__key">Supervisor</span><span class="kv__value">${esc(topic.coordinator)}</span></div><div class="kv__row"><span class="kv__key">Session</span><span class="kv__value">${slot ? `${esc(formatShortDate(slot.day))}, ${esc(slot.time)}, Room ${esc(slot.room)}` : "Not scheduled"}</span></div></div>`

@@ -6,13 +6,13 @@ let state = createSeed();
 function isStoredShape(value) {
   return Boolean(
     value &&
-      typeof value === "object" &&
-      Array.isArray(value.proposals) &&
-      Array.isArray(value.milestones) &&
-      Array.isArray(value.reviews) &&
-      Array.isArray(value.slots) &&
-      value.preferences &&
-      value.appearance,
+    typeof value === "object" &&
+    Array.isArray(value.proposals) &&
+    Array.isArray(value.milestones) &&
+    Array.isArray(value.reviews) &&
+    Array.isArray(value.slots) &&
+    value.preferences &&
+    value.appearance,
   );
 }
 

@@ -1,13 +1,24 @@
-import { COORDINATOR_NAME, LIMITS, ROLES, STUDENT_NAME } from "../config/constants.js";
+import {
+  COORDINATOR_NAME,
+  LIMITS,
+  ROLES,
+  STUDENT_NAME,
+} from "../config/constants.js";
 import { esc } from "../core/html.js";
-import { activeTopicOf, messagesWith, supervisedStudents } from "../core/selectors.js";
+import {
+  activeTopicOf,
+  messagesWith,
+  supervisedStudents,
+} from "../core/selectors.js";
 import { button } from "../components/button.js";
 import { icon } from "../components/icon.js";
 import { initials } from "../core/format.js";
 
 function participantsFor(state) {
   if (state.role === ROLES.coordinator) {
-    return supervisedStudents(state, COORDINATOR_NAME).map((proposal) => proposal.student);
+    return supervisedStudents(state, COORDINATOR_NAME).map(
+      (proposal) => proposal.student,
+    );
   }
   const topic = activeTopicOf(state, STUDENT_NAME);
   return topic && topic.status === "approved" ? [topic.coordinator] : [];
@@ -31,15 +42,28 @@ export function renderChat({ state, ui }) {
   if (!participants.length) {
     return lockedMarkup();
   }
-  const thread = participants.includes(ui.activeThread) ? ui.activeThread : participants[0];
-  const identity = state.role === ROLES.coordinator ? COORDINATOR_NAME : STUDENT_NAME;
-  const topic = state.role === ROLES.coordinator ? activeTopicOf(state, thread) : activeTopicOf(state, STUDENT_NAME);
-  const messages = messagesWith(state, state.role === ROLES.coordinator ? thread : STUDENT_NAME);
+  const thread = participants.includes(ui.activeThread)
+    ? ui.activeThread
+    : participants[0];
+  const identity =
+    state.role === ROLES.coordinator ? COORDINATOR_NAME : STUDENT_NAME;
+  const topic =
+    state.role === ROLES.coordinator
+      ? activeTopicOf(state, thread)
+      : activeTopicOf(state, STUDENT_NAME);
+  const messages = messagesWith(
+    state,
+    state.role === ROLES.coordinator ? thread : STUDENT_NAME,
+  );
   const people = participants
     .map((name) => {
       const log = messagesWith(state, name);
       const last = log[log.length - 1];
-      const preview = last ? (last.attachment ? `Attachment: ${last.attachment}` : last.text) : "No messages yet";
+      const preview = last
+        ? last.attachment
+          ? `Attachment: ${last.attachment}`
+          : last.text
+        : "No messages yet";
       return `<button class="chat__thread" type="button" data-action="select-thread" data-id="${esc(name)}" aria-pressed="${name === thread}"><span class="person__avatar" aria-hidden="true">${esc(initials(name))}</span><span class="chat__thread-copy"><span class="chat__thread-name"><span>${esc(name)}</span>${last ? `<span class="muted">${esc(last.time)}</span>` : ""}</span><span class="chat__thread-preview">${esc(preview)}</span></span></button>`;
     })
     .join("");

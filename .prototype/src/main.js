@@ -1,23 +1,60 @@
-import { COORDINATOR_NAME, PAGE_TITLES, SEARCHABLE_PAGES, STUDENT_NAME } from "./config/constants.js";
+import {
+  COORDINATOR_NAME,
+  PAGE_TITLES,
+  SEARCHABLE_PAGES,
+  STUDENT_NAME,
+} from "./config/constants.js";
 import { loadStore, getState, saveStore } from "./core/store.js";
 import { applyAppearance } from "./core/theme.js";
 import { bindEvents } from "./core/events.js";
-import { correctHash, navigateTo, pageFromHash, resolvePage } from "./core/router.js";
+import {
+  correctHash,
+  navigateTo,
+  pageFromHash,
+  resolvePage,
+} from "./core/router.js";
 import { activeTopicOf, supervisedStudents } from "./core/selectors.js";
 import { isAllowedUpload, safeFileName } from "./core/validation.js";
-import { accountMarkup, navMarkup, shellMarkup, topbarMarkup } from "./components/shell.js";
+import {
+  accountMarkup,
+  navMarkup,
+  shellMarkup,
+  topbarMarkup,
+} from "./components/shell.js";
 import { button } from "./components/button.js";
 import { showToast } from "./components/toast.js";
 import { PAGES } from "./pages/index.js";
 import { topicDialogMarkup, openTopicDialog } from "./dialogs/topic-dialog.js";
-import { milestoneDialogMarkup, openMilestoneDialog } from "./dialogs/milestone-dialog.js";
-import { reviewDialogMarkup, openReviewDialog } from "./dialogs/review-dialog.js";
+import {
+  milestoneDialogMarkup,
+  openMilestoneDialog,
+} from "./dialogs/milestone-dialog.js";
+import {
+  reviewDialogMarkup,
+  openReviewDialog,
+} from "./dialogs/review-dialog.js";
 import { closeDialog, closeDialogs } from "./dialogs/controls.js";
-import { proposeTopic, reviseTopic, decideProposal } from "./actions/proposals.js";
-import { addMilestone, toggleMilestone, recordMilestoneUpload, recordFinalUpload, saveReview } from "./actions/workflow.js";
+import {
+  proposeTopic,
+  reviseTopic,
+  decideProposal,
+} from "./actions/proposals.js";
+import {
+  addMilestone,
+  toggleMilestone,
+  recordMilestoneUpload,
+  recordFinalUpload,
+  saveReview,
+} from "./actions/workflow.js";
 import { openThread, sendMessage } from "./actions/messaging.js";
 import { setGrade, closeGrading } from "./actions/grading.js";
-import { switchRole, setThemeMode, setAccent, setZoom, saveSettings } from "./actions/preferences.js";
+import {
+  switchRole,
+  setThemeMode,
+  setAccent,
+  setZoom,
+  saveSettings,
+} from "./actions/preferences.js";
 import { exportMinutes } from "./actions/export-minutes.js";
 
 const STORAGE_NOTICE = "Changes are kept for this visit only.";
@@ -53,7 +90,12 @@ function focusKey(element) {
     return { id: element.id, action: "", target: "", decision: "" };
   }
   if (element.dataset.action) {
-    return { id: "", action: element.dataset.action, target: element.dataset.id ?? "", decision: element.dataset.decision ?? "" };
+    return {
+      id: "",
+      action: element.dataset.action,
+      target: element.dataset.id ?? "",
+      decision: element.dataset.decision ?? "",
+    };
   }
   return null;
 }
@@ -86,15 +128,26 @@ function renderView() {
 function render() {
   const state = getState();
   const requested = pageFromHash(win.location.hash);
-  const page = resolvePage(requested, state.role, preferenceOf(state).defaultPage);
+  const page = resolvePage(
+    requested,
+    state.role,
+    preferenceOf(state).defaultPage,
+  );
   if (page !== requested) {
     correctHash(page);
   }
   doc.body.dataset.page = page;
   const key = focusKey(doc.activeElement);
   slot("nav").innerHTML = navMarkup(state.role, page);
-  slot("account").innerHTML = accountMarkup({ name: preferenceOf(state).name, role: state.role });
-  slot("topbar").innerHTML = topbarMarkup({ page, query: state.ui.query, searchable: SEARCHABLE_PAGES.includes(page) });
+  slot("account").innerHTML = accountMarkup({
+    name: preferenceOf(state).name,
+    role: state.role,
+  });
+  slot("topbar").innerHTML = topbarMarkup({
+    page,
+    query: state.ui.query,
+    searchable: SEARCHABLE_PAGES.includes(page),
+  });
   doc.title = `${PAGE_TITLES[page]}, Thesis Coordinator`;
   slot("view").innerHTML = renderPageMarkup(page, state);
   restoreFocus(key);
@@ -124,7 +177,9 @@ function commitUi() {
 
 function setNav(open) {
   doc.body.classList.toggle("nav-open", open);
-  doc.querySelector('[data-action="toggle-nav"]')?.setAttribute("aria-expanded", String(open));
+  doc
+    .querySelector('[data-action="toggle-nav"]')
+    ?.setAttribute("aria-expanded", String(open));
 }
 
 function setAccount(open) {
@@ -132,7 +187,9 @@ function setAccount(open) {
   if (menu) {
     menu.hidden = !open;
   }
-  doc.querySelector('[data-action="toggle-account"]')?.setAttribute("aria-expanded", String(open));
+  doc
+    .querySelector('[data-action="toggle-account"]')
+    ?.setAttribute("aria-expanded", String(open));
 }
 
 function navigate(page) {
@@ -184,10 +241,14 @@ const ACTIONS = Object.freeze({
     commitUi();
   },
   decide(element) {
-    commit(decideProposal(getState(), element.dataset.id, element.dataset.decision));
+    commit(
+      decideProposal(getState(), element.dataset.id, element.dataset.decision),
+    );
   },
   revise(element) {
-    const proposal = getState().proposals.find((item) => item.id === element.dataset.id);
+    const proposal = getState().proposals.find(
+      (item) => item.id === element.dataset.id,
+    );
     if (proposal) {
       openTopicDialog({ coordinator: proposal.coordinator, proposal });
     }
@@ -214,14 +275,18 @@ const ACTIONS = Object.freeze({
     commitUi();
   },
   "add-milestone"() {
-    const students = supervisedStudents(getState(), COORDINATOR_NAME).map((proposal) => proposal.student);
+    const students = supervisedStudents(getState(), COORDINATOR_NAME).map(
+      (proposal) => proposal.student,
+    );
     openMilestoneDialog(students);
   },
   "toggle-milestone"(element) {
     commit(toggleMilestone(getState(), element.dataset.id));
   },
   "edit-review"(element) {
-    const review = getState().reviews.find((item) => item.id === element.dataset.id);
+    const review = getState().reviews.find(
+      (item) => item.id === element.dataset.id,
+    );
     if (review) {
       openReviewDialog(review);
     }
@@ -254,7 +319,14 @@ const CHANGES = Object.freeze({
   },
   "grade-input"(element) {
     const state = getState();
-    commit(setGrade(state, state.ui.gradeStudent, Number(element.dataset.index), element.value));
+    commit(
+      setGrade(
+        state,
+        state.ui.gradeStudent,
+        Number(element.dataset.index),
+        element.value,
+      ),
+    );
   },
   "upload-milestone"(element) {
     const file = element.files?.[0];
@@ -326,7 +398,9 @@ const SUBMITS = Object.freeze({
     }
     const state = getState();
     const values = Object.fromEntries(new FormData(form));
-    const result = form.dataset.editId ? reviseTopic(state, form.dataset.editId, values) : proposeTopic(state, values);
+    const result = form.dataset.editId
+      ? reviseTopic(state, form.dataset.editId, values)
+      : proposeTopic(state, values);
     if (result.changed) {
       closeDialogs();
       form.reset();
@@ -337,7 +411,10 @@ const SUBMITS = Object.freeze({
     if (!validateForm(form)) {
       return;
     }
-    const result = addMilestone(getState(), Object.fromEntries(new FormData(form)));
+    const result = addMilestone(
+      getState(),
+      Object.fromEntries(new FormData(form)),
+    );
     if (result.changed) {
       closeDialogs();
       form.reset();
@@ -348,7 +425,10 @@ const SUBMITS = Object.freeze({
     if (!validateForm(form)) {
       return;
     }
-    const result = saveReview(getState(), Object.fromEntries(new FormData(form)));
+    const result = saveReview(
+      getState(),
+      Object.fromEntries(new FormData(form)),
+    );
     if (result.changed) {
       closeDialogs();
     }
@@ -356,7 +436,10 @@ const SUBMITS = Object.freeze({
   },
   message(form) {
     const file = form.elements.file?.files?.[0];
-    const result = sendMessage(getState(), { text: form.elements.text.value, file });
+    const result = sendMessage(getState(), {
+      text: form.elements.text.value,
+      file,
+    });
     if (result.changed) {
       form.reset();
     }
@@ -405,7 +488,8 @@ function boot() {
   const state = loadStore();
   applyAppearance(state.appearance);
   doc.getElementById("app").innerHTML = shellMarkup();
-  slot("dialogs").innerHTML = `${topicDialogMarkup()}${milestoneDialogMarkup()}${reviewDialogMarkup()}`;
+  slot("dialogs").innerHTML =
+    `${topicDialogMarkup()}${milestoneDialogMarkup()}${reviewDialogMarkup()}`;
   bindEvents(dispatch);
   doc.addEventListener("click", closeAccountOutside);
   win.addEventListener("hashchange", () => {

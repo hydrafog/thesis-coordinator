@@ -85,15 +85,35 @@
 :root {
   --color-focus: var(--accent);
   --color-accent-tint: color-mix(in srgb, var(--accent) 12%, transparent);
-  --color-accent-tint-strong: color-mix(in srgb, var(--accent) 22%, transparent);
+  --color-accent-tint-strong: color-mix(
+    in srgb,
+    var(--accent) 22%,
+    transparent
+  );
 
-  --tone-success-bg: color-mix(in srgb, var(--tone-success) 14%, var(--color-surface));
+  --tone-success-bg: color-mix(
+    in srgb,
+    var(--tone-success) 14%,
+    var(--color-surface)
+  );
   --tone-success-fg: var(--tone-success-deep);
-  --tone-warning-bg: color-mix(in srgb, var(--tone-warning) 16%, var(--color-surface));
+  --tone-warning-bg: color-mix(
+    in srgb,
+    var(--tone-warning) 16%,
+    var(--color-surface)
+  );
   --tone-warning-fg: var(--tone-warning-deep);
-  --tone-danger-bg: color-mix(in srgb, var(--tone-danger) 14%, var(--color-surface));
+  --tone-danger-bg: color-mix(
+    in srgb,
+    var(--tone-danger) 14%,
+    var(--color-surface)
+  );
   --tone-danger-fg: var(--tone-danger);
-  --tone-info-bg: color-mix(in srgb, var(--tone-info) 12%, var(--color-surface));
+  --tone-info-bg: color-mix(
+    in srgb,
+    var(--tone-info) 12%,
+    var(--color-surface)
+  );
   --tone-info-fg: var(--tone-info);
   --tone-neutral-bg: var(--color-surface-muted);
   --tone-neutral-fg: var(--color-text-muted);

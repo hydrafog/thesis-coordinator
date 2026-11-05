@@ -1,4 +1,10 @@
-import { ACCENTS, LIMITS, ROLES, THEME_MODES, ZOOM_PRESETS } from "../config/constants.js";
+import {
+  ACCENTS,
+  LIMITS,
+  ROLES,
+  THEME_MODES,
+  ZOOM_PRESETS,
+} from "../config/constants.js";
 import { pagesFor } from "../core/router.js";
 import { cleanText } from "../core/validation.js";
 
@@ -15,7 +21,10 @@ export function setThemeMode(state, mode) {
     return { changed: false, message: "" };
   }
   state.appearance.themeMode = mode;
-  return { changed: true, message: mode === "dark" ? "Dark mode on." : "Light mode on." };
+  return {
+    changed: true,
+    message: mode === "dark" ? "Dark mode on." : "Light mode on.",
+  };
 }
 
 export function setAccent(state, accent) {
@@ -42,7 +51,9 @@ export function saveSettings(state, values) {
   const preference = state.preferences[state.role];
   const pages = pagesFor(state.role);
   preference.name = name;
-  preference.defaultPage = pages.includes(values.defaultPage) ? values.defaultPage : preference.defaultPage;
+  preference.defaultPage = pages.includes(values.defaultPage)
+    ? values.defaultPage
+    : preference.defaultPage;
   preference.alerts = values.alerts === "on";
   return { changed: true, message: "Preferences updated." };
 }

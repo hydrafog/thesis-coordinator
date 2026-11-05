@@ -83,7 +83,8 @@ a {
   border: var(--border-width) solid var(--color-line-strong);
   border-radius: var(--radius-md);
   transform: translateY(-200%);
-  transition: transform var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: transform var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .skip-link:focus {

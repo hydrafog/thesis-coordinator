@@ -6,6 +6,10 @@ export function capacityBar(used, max) {
 }
 
 export function placesMeter(used, max) {
-  const marks = Array.from({ length: max }, (_, index) => `<span class="places__mark" data-filled="${index < used}"></span>`).join("");
+  const marks = Array.from(
+    { length: max },
+    (_, index) =>
+      `<span class="places__mark" data-filled="${index < used}"></span>`,
+  ).join("");
   return `<div class="places" role="img" aria-label="${esc(`${used} of ${max} places filled`)}">${marks}</div>`;
 }

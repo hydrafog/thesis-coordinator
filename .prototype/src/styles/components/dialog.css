@@ -14,7 +14,8 @@
 }
 
 .dialog[open] {
-  animation: motion-dialog-enter var(--motion-modal-enter-duration) var(--motion-modal-enter-ease);
+  animation: motion-dialog-enter var(--motion-modal-enter-duration)
+    var(--motion-modal-enter-ease);
 }
 
 .dialog::backdrop {
@@ -22,11 +23,13 @@
 }
 
 .dialog[open]::backdrop {
-  animation: motion-fade-in var(--motion-blanket-enter-duration) var(--motion-blanket-enter-ease);
+  animation: motion-fade-in var(--motion-blanket-enter-duration)
+    var(--motion-blanket-enter-ease);
 }
 
 .dialog.dialog--leaving {
-  animation: motion-dialog-exit var(--motion-modal-exit-duration) var(--motion-modal-exit-ease) forwards;
+  animation: motion-dialog-exit var(--motion-modal-exit-duration)
+    var(--motion-modal-exit-ease) forwards;
 }
 
 .dialog__form {

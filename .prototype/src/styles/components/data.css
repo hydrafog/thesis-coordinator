@@ -12,7 +12,8 @@
   padding: var(--space-3);
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .record:hover {
@@ -47,7 +48,8 @@
 }
 
 .table tbody tr {
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .table tbody tr:hover {
@@ -108,7 +110,8 @@
   padding: var(--space-3);
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .directory__item:hover {
@@ -159,7 +162,8 @@
   padding: var(--space-3);
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .milestone:hover {
@@ -172,7 +176,8 @@
   flex: none;
   border-radius: var(--radius-pill);
   background: var(--color-surface-sunken);
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .milestone__mark[data-done="true"] {
@@ -199,7 +204,8 @@
   padding: var(--space-4);
   border-radius: var(--radius-md);
   background: var(--color-surface-muted);
-  transition: background-color var(--motion-duration-short) var(--motion-ease-out-subtle);
+  transition: background-color var(--motion-duration-short)
+    var(--motion-ease-out-subtle);
 }
 
 .review:hover {
