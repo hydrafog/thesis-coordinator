@@ -108,4 +108,3 @@ All reusable components are located in [`src/core/ui/`](../../src/core/ui/) and 
 2. **Keyboard focus**: High-visibility focus rings (`:focus-visible`) use `--accent-focus` with clear outline offsets.
 3. **Screen readers**: Icon-only buttons render `<span class="sr-only">` fallback text.
 4. **Semantics**: Native dialogs, status regions (`role="status"`), and progress bars (`role="progressbar"`) carry valid ARIA attributes.
-
