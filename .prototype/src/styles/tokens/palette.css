@@ -1,0 +1,53 @@
+:root {
+  --ink-900: #162456;
+  --ink-800: #273872;
+  --ink-600: #4d5e94;
+  --ink-200: rgb(22 36 86 / 0.22);
+  --ink-100: rgb(22 36 86 / 0.12);
+  --ink-050: rgb(22 36 86 / 0.06);
+
+  --paper-000: #ffffff;
+  --paper-050: #f7f8fa;
+  --paper-100: #eef1f5;
+  --paper-200: #e2e6ed;
+
+  --night-000: #0e1014;
+  --night-100: #13161c;
+  --night-200: #1a1e26;
+  --night-300: #232834;
+  --night-400: #252d3d;
+  --night-500: #353f54;
+  --night-600: #465470;
+  --night-700: #8090b2;
+  --night-800: #b2bed8;
+  --night-900: #e2e8f4;
+
+  --tone-success: #059458;
+  --tone-success-deep: #035e65;
+  --tone-warning: #d97706;
+  --tone-warning-deep: #b45309;
+  --tone-danger: #be2111;
+  --tone-info: #273872;
+  --tone-neutral: #4d5e94;
+  --tone-white: #ffffff;
+
+  --accent-vermilion: #df3422;
+  --accent-vermilion-deep: #be2111;
+  --accent-vermilion-warm: #d97706;
+
+  --accent-pink: #ea2b7b;
+  --accent-pink-deep: #9e104e;
+  --accent-pink-warm: #763fe6;
+
+  --accent-teal: #08969f;
+  --accent-teal-deep: #035e65;
+  --accent-teal-warm: #059458;
+
+  --accent-amber: #d97706;
+  --accent-amber-deep: #b45309;
+  --accent-amber-warm: #df3422;
+
+  --accent-violet: #763fe6;
+  --accent-violet-deep: #4d1eb8;
+  --accent-violet-warm: #ea2b7b;
+}

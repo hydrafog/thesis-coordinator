@@ -1,0 +1,43 @@
+.workspace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+.workspace__main {
+  flex: 1 1 var(--workspace-main-min);
+  min-width: 0;
+  display: grid;
+  gap: var(--space-6);
+  align-content: start;
+}
+
+.workspace__rail {
+  flex: 0 1 var(--rail-width);
+  min-width: min(100%, var(--rail-width));
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
