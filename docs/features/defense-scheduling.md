@@ -18,7 +18,16 @@ flowchart TD
 
 ## Slot invariants
 
-- Each slot is exactly 20 minutes.
-- A committee member cannot hold two simultaneous slots.
-- A supervisor cannot serve on their own student's committee.
+- Each slot is exactly 20 minutes (`DEFENSE_SLOT_DURATION_MINUTES = 20`), enforced by `calculateSlotEndTime`.
+- A committee member cannot hold two simultaneous slots, validated by `checkDefenseSlotConflicts`.
+- A supervisor cannot serve on their own student's committee, enforced via `checkDefenseSlotConflicts`.
+- A candidate cannot be scheduled unless their defense dossier is in `VERIFIED` state.
 - Published schedules are immutable; changes go through an audited reschedule flow.
+
+## Implementation modules
+
+- Domain logic: `src/features/defense/domain/defense-slot.ts`, `src/features/defense/domain/committee.ts`
+- Data repositories: `src/features/defense/data/slot-repository.ts`, `src/features/defense/data/committee-repository.ts`
+- Server actions: `src/features/defense/actions.ts` (`scheduleDefenseSlotAction`, `reorderDefenseSlotsAction`, `deleteDefenseSlotAction`)
+- Presentation: `src/features/defense/presentation/schedule-board.tsx`, `src/features/defense/presentation/slot-editor.tsx`
+- Administration routes: `src/app/(admin)/admin/schedule/page.tsx`, `src/app/(admin)/committees/page.tsx`

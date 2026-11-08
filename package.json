@@ -17,7 +17,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run --passWithNoTests tests",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "export:docs": "python3 scripts/export/export-docs.py",
