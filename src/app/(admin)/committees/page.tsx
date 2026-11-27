@@ -5,6 +5,8 @@ import { CommitteeControls } from "./committee-controls";
 import { Person } from "@/core/ui/person";
 import { StatusBadge } from "@/core/ui/status-badge";
 
+export const dynamic = "force-dynamic";
+
 export default async function CommitteesPage() {
   const [committees, users] = await Promise.all([
     committeeRepository.findAll(),
