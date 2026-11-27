@@ -16,10 +16,18 @@ stateDiagram-v2
 
 ## Checklist
 
-| Item | Owner | Required |
-|---|---|---|
-| Locked final thesis | Student | yes |
-| Coordinator report | Coordinator | yes |
-| Similarity report | System | yes |
-| Assignment and approval record | System | yes |
-| Institutional documents | Student / admin | per policy |
+| Item | Owner | Required | State Model |
+|---|---|---|---|
+| Locked final thesis | Student | yes | `FINAL_THESIS` |
+| Coordinator report | Coordinator | yes | `COORDINATOR_REPORT` |
+| Similarity report | System | yes | `SIMILARITY_REPORT` |
+| Assignment and approval record | System | yes | `APPROVAL_RECORD` |
+| Institutional documents | Student / admin | per policy | `INSTITUTIONAL_DOC` |
+
+## Implementation modules
+
+- Domain state machine: `src/features/defense/domain/defense-file.ts` (`transitionDossierState`, `canVerifyDossier`)
+- Data repository: `src/features/defense/data/dossier-repository.ts` (`DossierRepository`)
+- Server actions: `src/features/defense/actions.ts` (`submitDossierAction`, `verifyDossierAction`, `returnDossierAction`, `updateDossierItemStatusAction`)
+- Presentation: `src/features/defense/presentation/dossier-checklist.tsx`
+- Administration routes: `src/app/(admin)/dossiers/page.tsx`

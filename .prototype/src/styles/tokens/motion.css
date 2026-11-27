@@ -1,0 +1,159 @@
+/* Motion tokens sourced strictly from Atlassian Design System via .agents/skills/design/assets/motion/curves.json */
+:root {
+  /* Durations - Source: atlassian.durations_ms.semantic */
+  --motion-duration-instant: 0ms;
+  /* atlassian: duration.instant */
+  --motion-duration-reduced: 50ms;
+  /* atlassian: duration.xxshort (fallback opacity crossfade for prefers-reduced-motion) */
+  --motion-duration-xxshort: 50ms;
+  /* atlassian: duration.xxshort */
+  --motion-duration-xshort: 100ms;
+  /* atlassian: duration.xshort */
+  --motion-duration-short: 150ms;
+  /* atlassian: duration.short */
+  --motion-duration-medium: 200ms;
+  /* atlassian: duration.medium */
+  --motion-duration-long: 250ms;
+  /* atlassian: duration.long */
+  --motion-duration-xlong: 400ms;
+  /* atlassian: duration.xlong */
+  --motion-duration-xxlong: 600ms;
+  /* atlassian: duration.xxlong */
+
+  /* Easings - Source: atlassian.easings */
+  --motion-ease-in: cubic-bezier(0.6, 0, 0.8, 0.6);
+  /* atlassian: EasePracticalIn / easing.in.practical (accelerate away for exits) */
+  --motion-ease-out: cubic-bezier(0, 0.4, 0, 1);
+  /* atlassian: EaseBoldOut / easing.out.bold (decelerate into place for entrances) */
+  --motion-ease-out-subtle: cubic-bezier(0.4, 1, 0.6, 1);
+  /* atlassian: EasePracticalOut / easing.out.practical (gentle landing for micro-interactions) */
+  --motion-ease-in-out: cubic-bezier(0.4, 0, 0, 1);
+  /* atlassian: EaseBoldInOut / easing.inout.bold (paired with scale and repositioning) */
+  --motion-ease-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  /* atlassian: EaseCubicInOut */
+
+  /* Component Motion Tokens - Source: atlassian.component_motion */
+  /* button.hovered: duration_ms: 100 (duration.xshort), curve: EasePracticalOut */
+  --motion-button-duration: var(--motion-duration-xshort);
+  --motion-button-ease: var(--motion-ease-out-subtle);
+
+  /* modal.enter: duration_ms: 250, curve: EaseBoldInOut */
+  --motion-modal-enter-duration: var(--motion-duration-long);
+  --motion-modal-enter-ease: var(--motion-ease-in-out);
+
+  /* modal.exit: duration_ms: 200, curve: EasePracticalIn */
+  --motion-modal-exit-duration: var(--motion-duration-medium);
+  --motion-modal-exit-ease: var(--motion-ease-in);
+
+  /* blanket.enter: duration_ms: 250, curve: EaseBoldInOut */
+  --motion-blanket-enter-duration: var(--motion-duration-long);
+  --motion-blanket-enter-ease: var(--motion-ease-in-out);
+
+  /* blanket.exit: duration_ms: 200, curve: EasePracticalIn */
+  --motion-blanket-exit-duration: var(--motion-duration-medium);
+  --motion-blanket-exit-ease: var(--motion-ease-in);
+
+  /* flag.enter: duration_ms: 250, curve: EaseBoldOut */
+  --motion-toast-enter-duration: var(--motion-duration-long);
+  --motion-toast-enter-ease: var(--motion-ease-out);
+
+  /* flag.exit: duration_ms: 200, curve: EasePracticalIn */
+  --motion-toast-exit-duration: var(--motion-duration-medium);
+  --motion-toast-exit-ease: var(--motion-ease-in);
+
+  /* sidenav.enter.left: duration_ms: 250, curve: EaseBoldOut */
+  --motion-sidebar-enter-duration: var(--motion-duration-long);
+  --motion-sidebar-enter-ease: var(--motion-ease-out);
+
+  /* sidenav.exit.left: duration_ms: 200, curve: EasePracticalIn */
+  --motion-sidebar-exit-duration: var(--motion-duration-medium);
+  --motion-sidebar-exit-ease: var(--motion-ease-in);
+
+  /* tab.[default]: duration_ms: 100 (duration.xshort), curve: EasePracticalOut */
+  --motion-tab-duration: var(--motion-duration-xshort);
+  --motion-tab-ease: var(--motion-ease-out-subtle);
+}
+
+/* Keyframes - Source: atlassian.keyframes */
+@keyframes motion-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes motion-fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Modal Dialog: scale(0.96) entrance (Reject scale(0) per MOTION-TIMING) */
+@keyframes motion-dialog-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes motion-dialog-exit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+/* Toast entrance & exit - atlassian SlideInTop8px & SlideOutBottom4px */
+@keyframes motion-toast-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-toast-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* Content view / card entrance */
+@keyframes motion-view-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

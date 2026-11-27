@@ -1,1 +1,10 @@
-export {};
+export * from "./domain/committee";
+export * from "./domain/defense-slot";
+export * from "./domain/defense-file";
+export * from "./data/committee-repository";
+export * from "./data/slot-repository";
+export * from "./data/dossier-repository";
+export * from "./actions";
+export * from "./presentation/slot-editor";
+export * from "./presentation/schedule-board";
+export * from "./presentation/dossier-checklist";
