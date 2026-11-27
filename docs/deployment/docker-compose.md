@@ -6,6 +6,7 @@ The production deployment uses Docker Compose for orchestrating the Next.js appl
 
 - `postgres`: PostgreSQL 16 Alpine container with database `thesis`, user `app`, persistent storage volume `postgres_data`, and health check.
 - `minio`: MinIO object storage container with private bucket configuration, S3 API on port 9000, console on 9001, and persistent storage volume `minio_data`.
+- `events`: Socket.IO server built from the same image (`pnpm events:start`, compiled by `pnpm events:build` into `dist/events`), listening on port 3001. It reads PostgreSQL to authorize channel subscriptions and verifies sessions by calling the web service. Route the public `/socket.io` path (or `NEXT_PUBLIC_EVENTS_URL`) to it in the tunnel.
 - `web`: Next.js web application container built from multi-stage `Dockerfile`, exposing port 3000, connecting to PostgreSQL and MinIO over internal Docker networking with health monitoring.
 
 ## Configuration
@@ -22,6 +23,9 @@ MINIO_BUCKET=thesis-private
 MINIO_ACCESS_KEY=minioadmin
 MINIO_SECRET_KEY=minioadmin
 MAX_UPLOAD_BYTES=52428800
+EVENTS_URL=http://events:3001
+EVENTS_INTERNAL_TOKEN=change-me-to-a-long-random-value
+APP_INTERNAL_URL=http://web:3000
 ```
 
 ## Running the application

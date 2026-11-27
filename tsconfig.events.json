@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "noEmit": false,
+    "incremental": false,
+    "outDir": "dist/events",
+    "rootDir": "src",
+    "plugins": []
+  },
+  "include": ["src/core/events/main.ts"],
+  "exclude": ["node_modules", "src/core/events/client.ts"]
+}

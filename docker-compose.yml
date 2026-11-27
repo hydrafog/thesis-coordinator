@@ -54,11 +54,32 @@ services:
       MINIO_ACCESS_KEY: "minioadmin"
       MINIO_SECRET_KEY: "minioadmin"
       MAX_UPLOAD_BYTES: "52428800"
+      EVENTS_URL: "http://events:3001"
+      EVENTS_INTERNAL_TOKEN: "development-events-token-change-me"
     depends_on:
       postgres:
         condition: service_healthy
       minio:
         condition: service_started
+
+  events:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: thesis-events
+    restart: unless-stopped
+    command: ["pnpm", "events:start"]
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: "postgresql://app:secret@postgres:5432/thesis"
+      APP_URL: "http://localhost:3000"
+      APP_INTERNAL_URL: "http://web:3000"
+      EVENTS_PORT: "3001"
+      EVENTS_INTERNAL_TOKEN: "development-events-token-change-me"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:

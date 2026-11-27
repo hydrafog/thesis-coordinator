@@ -55,6 +55,17 @@ enum SimilarityState {
   FAILED
 }
 
+enum SimilarityResolution {
+  ACCEPTED
+  REJECTED
+}
+
+enum SubmissionState {
+  OPEN
+  LOCKED
+  SUPERSEDED
+}
+
 enum DossierState {
   DRAFT
   SUBMITTED
@@ -211,7 +222,8 @@ model Thesis {
   submissions        Submission[]
   defenseFile        DefenseFile?
   defenseSlot        DefenseSlot?
-  conversations      Conversation[]
+  conversation       Conversation?
+  supervisorReport   SupervisorReport?
 
   @@index([studentId])
   @@index([coordinatorId])
@@ -248,39 +260,46 @@ model Milestone {
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
 
-  thesis   Thesis    @relation(fields: [thesisId], references: [id], onDelete: Cascade)
-  proposal Proposal? @relation(fields: [proposalId], references: [id], onDelete: SetNull)
+  thesis      Thesis       @relation(fields: [thesisId], references: [id], onDelete: Cascade)
+  proposal    Proposal?    @relation(fields: [proposalId], references: [id], onDelete: SetNull)
+  submissions Submission[]
 
   @@index([thesisId])
 }
 
 model Submission {
-  id        String    @id @default(cuid())
-  thesisId  String
-  title     String
-  notes     String?
-  lockedAt  DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          String          @id @default(cuid())
+  thesisId    String
+  milestoneId String?
+  title       String
+  notes       String?
+  state       SubmissionState @default(OPEN)
+  lockedAt    DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
 
   thesis           Thesis            @relation(fields: [thesisId], references: [id], onDelete: Cascade)
+  milestone        Milestone?        @relation(fields: [milestoneId], references: [id], onDelete: SetNull)
   fileVersions     FileVersion[]
   reviews          Review[]
   similarityReport SimilarityReport?
 
   @@index([thesisId])
+  @@index([milestoneId])
 }
 
 model FileVersion {
-  id           String   @id @default(cuid())
-  submissionId String
-  version      Int
-  fileName     String
-  fileKey      String
-  fileSize     Int
-  mimeType     String
-  checksum     String
-  createdAt    DateTime @default(now())
+  id            String   @id @default(cuid())
+  submissionId  String
+  version       Int
+  uploadedById  String
+  fileName      String
+  fileKey       String   @unique
+  fileSize      Int
+  mimeType      String
+  checksum      String
+  extractedText String?  @db.Text
+  createdAt     DateTime @default(now())
 
   submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
@@ -292,26 +311,64 @@ model Review {
   id           String         @id @default(cuid())
   submissionId String
   authorId     String
+  version      Int
   decision     ReviewDecision
   comments     String?
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
-  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  submission  Submission         @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  annotations ReviewAnnotation[]
 
   @@index([submissionId])
 }
 
+model ReviewAnnotation {
+  id        String   @id @default(cuid())
+  reviewId  String
+  chapter   String
+  page      Int?
+  quote     String?
+  comment   String
+  createdAt DateTime @default(now())
+
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@index([reviewId])
+}
+
 model SimilarityReport {
-  id           String          @id @default(cuid())
-  submissionId String          @unique
-  score        Float
-  state        SimilarityState @default(PENDING)
-  reportKey    String?
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  id              String                @id @default(cuid())
+  submissionId    String                @unique
+  provider        String
+  inputVersion    Int
+  score           Float                 @default(0)
+  state           SimilarityState       @default(PENDING)
+  metadata        Json?
+  reportKey       String?
+  resolution      SimilarityResolution?
+  resolutionNotes String?
+  resolvedById    String?
+  resolvedAt      DateTime?
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
 
   submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+}
+
+model SupervisorReport {
+  id          String   @id @default(cuid())
+  thesisId    String   @unique
+  authorId    String
+  summary     String?
+  fileName    String
+  fileKey     String   @unique
+  fileSize    Int
+  mimeType    String
+  checksum    String
+  submittedAt DateTime @default(now())
+
+  thesis Thesis @relation(fields: [thesisId], references: [id], onDelete: Cascade)
 }
 
 model DefenseFile {
@@ -434,15 +491,13 @@ model DefenseMinutes {
 
 model Conversation {
   id        String   @id @default(cuid())
-  thesisId  String?
+  thesisId  String?  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   thesis       Thesis?                   @relation(fields: [thesisId], references: [id], onDelete: SetNull)
   participants ConversationParticipant[]
   messages     Message[]
-
-  @@index([thesisId])
 }
 
 model ConversationParticipant {
@@ -465,23 +520,25 @@ model Message {
   senderId       String
   content        String
   readAt         DateTime?
+  emailAlertedAt DateTime?
   createdAt      DateTime  @default(now())
 
   conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   sender       User         @relation(fields: [senderId], references: [id], onDelete: Restrict)
   attachments  Attachment[]
 
-  @@index([conversationId])
+  @@index([conversationId, createdAt])
   @@index([senderId])
 }
 
 model Attachment {
   id        String   @id @default(cuid())
   messageId String
-  fileKey   String
+  fileKey   String   @unique
   fileName  String
   fileSize  Int
   mimeType  String
+  checksum  String
   createdAt DateTime @default(now())
 
   message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)

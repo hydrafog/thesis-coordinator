@@ -13,7 +13,8 @@ The target data model uses stable identifiers, timestamps, explicit ownership, a
 | Milestone | Deadline and completion state for proposal, drafts, submission, and defense |
 | File and file version | Metadata for uploaded PDFs, ZIP archives, attachments, and generated documents |
 | Review | Supervisor or committee feedback, including chapter-level annotations |
-| Similarity report | Similarity-check request, provider metadata, score, and review outcome |
+| Similarity report | Similarity-check request, provider metadata, score, input version, and coordinator resolution |
+| Supervisor report | The coordinator's final PDF report for a thesis, submitted after review and similarity checks |
 | Defense session | 20-minute date and slot, location or meeting link, status, and assigned committee |
 | Grade | Per-criterion committee scores, comments, and final result |
 | Message | Private conversation content and attachment references |
