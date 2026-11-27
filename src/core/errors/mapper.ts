@@ -8,8 +8,7 @@ export type ActionFailure = {
 };
 
 export type ActionResult<T extends object = object> =
-  | ({ success: true } & T)
-  | ActionFailure;
+  ({ success: true } & T) | ActionFailure;
 
 const HTTP_STATUS: Record<DomainErrorCode, number> = {
   unauthenticated: 401,

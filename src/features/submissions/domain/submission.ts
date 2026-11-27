@@ -46,10 +46,7 @@ export function nextVersionNumber(existing: number[]): number {
 }
 
 export type ReviewState =
-  | "pending"
-  | "approved"
-  | "changes-requested"
-  | "rejected";
+  "pending" | "approved" | "changes-requested" | "rejected";
 
 export function deriveReviewState(
   latestVersion: number | null,

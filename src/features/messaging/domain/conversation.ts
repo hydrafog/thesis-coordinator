@@ -35,7 +35,5 @@ export function previewOf(message: {
   if (message.content !== "") {
     return message.content.slice(0, 80);
   }
-  return message.attachmentName
-    ? `Attachment: ${message.attachmentName}`
-    : "";
+  return message.attachmentName ? `Attachment: ${message.attachmentName}` : "";
 }

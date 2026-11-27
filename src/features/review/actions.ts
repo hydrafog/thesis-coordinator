@@ -10,10 +10,7 @@ import {
   runSimilarityCheck,
 } from "./service/review-service";
 
-export async function createReviewAction(
-  submissionId: string,
-  input: unknown,
-) {
+export async function createReviewAction(submissionId: string, input: unknown) {
   return runAction(async () => {
     const actor = await requireUser();
     await createReview(actor, parseInput(idSchema, submissionId), input);

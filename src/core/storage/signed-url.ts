@@ -33,8 +33,7 @@ export function createDownloadUrl(
   userId: string,
   now: Date = new Date(),
 ): string {
-  const expires =
-    Math.floor(now.getTime() / 1000) + DOWNLOAD_URL_TTL_SECONDS;
+  const expires = Math.floor(now.getTime() / 1000) + DOWNLOAD_URL_TTL_SECONDS;
   const query = new URLSearchParams({
     u: userId,
     exp: String(expires),

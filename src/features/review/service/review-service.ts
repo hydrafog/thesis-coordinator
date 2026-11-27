@@ -87,10 +87,7 @@ export async function runSimilarityCheck(
   const access = await requireSupervisor(actor, submissionId);
   const latest = await reviewRepository.findLatestVersion(submissionId);
   if (!latest) {
-    throw new DomainError(
-      "validation_failed",
-      "There is no version to check.",
-    );
+    throw new DomainError("validation_failed", "There is no version to check.");
   }
   if (latest.mimeType !== "application/pdf") {
     throw new DomainError(

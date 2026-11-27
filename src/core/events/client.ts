@@ -35,13 +35,11 @@ export function useChannel(
       return;
     }
     const connection = getSocket();
-    const listeners = (eventNames ? eventNames.split(",") : []).map(
-      (name) => {
-        const listener = (payload: unknown) => latest.current[name]?.(payload);
-        connection.on(name, listener);
-        return [name, listener] as const;
-      },
-    );
+    const listeners = (eventNames ? eventNames.split(",") : []).map((name) => {
+      const listener = (payload: unknown) => latest.current[name]?.(payload);
+      connection.on(name, listener);
+      return [name, listener] as const;
+    });
     const subscribe = () => connection.emit("subscribe", channel);
     connection.on("connect", subscribe);
     if (connection.connected) {
