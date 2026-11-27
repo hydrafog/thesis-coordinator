@@ -9,6 +9,8 @@ import { LiveAverage } from "@/features/grading/presentation/live-average";
 import { SessionControls } from "@/features/grading/presentation/session-controls";
 import { computeLiveMean } from "@/features/grading/domain/grading-session";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   searchParams?: Promise<{ slotId?: string }>;
 }

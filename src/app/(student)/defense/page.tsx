@@ -11,6 +11,8 @@ import {
 } from "@/features/defense/presentation/schedule-board";
 import { StatusBadge } from "@/core/ui/status-badge";
 
+export const dynamic = "force-dynamic";
+
 export default async function StudentDefensePage() {
   const studentProfile = await prisma.studentProfile.findFirst({
     include: {

@@ -1,4 +1,4 @@
-D"use client";
+"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/core/ui/button";
@@ -56,7 +56,8 @@ export function SessionControls({
           {isClosed ? (
             <div>
               <p className="muted">
-                Grading session finalized. Defense minutes generated and recorded.
+                Grading session finalized. Defense minutes generated and
+                recorded.
               </p>
               {minutesKey && (
                 <p className="muted text-xs">

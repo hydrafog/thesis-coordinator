@@ -9,6 +9,8 @@ import {
 import { SlotScheduleControls } from "./schedule-controls";
 import { DossierState } from "@prisma/client";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminSchedulePage() {
   const [slots, committees, verifiedDossiers] = await Promise.all([
     slotRepository.findAll(),
