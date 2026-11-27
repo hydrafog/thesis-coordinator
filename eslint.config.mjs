@@ -10,6 +10,7 @@ const config = [
   {
     ignores: [
       ".next/**",
+      "dist/**",
       ".prototype/**",
       "coverage/**",
       "node_modules/**",

@@ -13,15 +13,20 @@ Use foreign keys, unique constraints, explicit state fields, timestamps, and rev
 | `Thesis` | `id`, `studentId`, `status` | FK `studentId -> StudentProfile.id` |
 | `Proposal` | `id`, `thesisId`, `state`, `revision` | Unique `(thesisId, revision)` |
 | `Milestone` | `id`, `proposalId`, `dueAt`, `state` | FK `proposalId` |
-| `Submission` | `id`, `thesisId`, `lockedAt` | FK `thesisId` |
-| `FileVersion` | `id`, `submissionId`, `version`, `checksum` | Unique `(submissionId, version)` |
-| `Review` | `id`, `submissionId`, `authorId`, `decision` | FK `submissionId` |
-| `SimilarityReport` | `id`, `submissionId`, `score`, `state` | FK `submissionId` |
+| `Submission` | `id`, `thesisId`, `milestoneId`, `state`, `lockedAt` | FK `thesisId`, optional FK `milestoneId`, `state` is `OPEN`, `LOCKED`, or `SUPERSEDED` |
+| `FileVersion` | `id`, `submissionId`, `version`, `uploadedById`, `fileKey`, `checksum`, `extractedText` | Unique `(submissionId, version)`, unique `fileKey` |
+| `Review` | `id`, `submissionId`, `authorId`, `version`, `decision` | FK `submissionId` |
+| `ReviewAnnotation` | `id`, `reviewId`, `chapter`, `page`, `quote`, `comment` | FK `reviewId`, cascade delete |
+| `SimilarityReport` | `id`, `submissionId`, `provider`, `inputVersion`, `score`, `state`, `metadata`, `resolution` | Unique `submissionId` |
+| `SupervisorReport` | `id`, `thesisId`, `authorId`, `fileKey`, `checksum`, `submittedAt` | Unique `thesisId`, unique `fileKey` |
+| `Conversation` | `id`, `thesisId` | Unique `thesisId` (one conversation per thesis) |
+| `ConversationParticipant` | `conversationId`, `userId` | Unique `(conversationId, userId)` |
 | `DefenseSession` | `id`, `thesisId`, `slot`, `committeeId` | Unique active slot per participant |
 | `Committee` | `id`, `defenseId` | 1:1 with `DefenseSession` |
 | `GradingSession` | `id`, `defenseId`, `state` | Unique `defenseId` while `Open` |
 | `Grade` | `id`, `gradingSessionId`, `memberId`, `value` | Unique `(gradingSessionId, memberId, criterion)` |
-| `Message` | `id`, `conversationId`, `senderId`, `sentAt` | FK `conversationId` |
+| `Message` | `id`, `conversationId`, `senderId`, `readAt`, `emailAlertedAt`, `createdAt` | FK `conversationId`, index `(conversationId, createdAt)` |
+| `Attachment` | `id`, `messageId`, `fileKey`, `checksum` | FK `messageId`, unique `fileKey` |
 | `AuditEvent` | `id`, `actorId`, `action`, `targetId`, `at` | Indexed `(targetId, at)` |
 
 ## Capacity protection

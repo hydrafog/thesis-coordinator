@@ -25,16 +25,18 @@
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   text-align: start;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color var(--motion-duration-xshort)
     var(--motion-ease-out-subtle);
 }
 
-.chat__thread:hover:not([aria-pressed="true"]) {
+.chat__thread:hover:not([aria-pressed="true"], [aria-current="page"]) {
   background: var(--color-surface-hover);
 }
 
-.chat__thread[aria-pressed="true"] {
+.chat__thread[aria-pressed="true"],
+.chat__thread[aria-current="page"] {
   background: var(--color-accent-tint);
 }
 
@@ -129,6 +131,12 @@
 }
 
 .bubble__stamp {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.chat__typing {
+  min-height: var(--space-4);
   font-size: var(--text-caption);
   color: var(--color-text-muted);
 }

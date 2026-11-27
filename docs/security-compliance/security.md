@@ -12,7 +12,7 @@ Thesis drafts, personal information, grades, messages, and defense records are c
 
 ## Files and integrations
 
-Validate upload size, type, filename, and ownership. Scan uploaded files where supported, store generated object keys rather than user-controlled paths, and prevent path traversal. Validate webhook or provider responses and make external jobs idempotent.
+Validate upload size, type, filename, content signature, and ownership. Downloads are streamed through the app after a session check, a short-lived HMAC grant bound to the user and object key, and a database ownership check. Scan uploaded files where supported, store generated object keys rather than user-controlled paths, and prevent path traversal. Validate webhook or provider responses and make external jobs idempotent.
 
 ## Audit and retention
 

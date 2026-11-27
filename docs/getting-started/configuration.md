@@ -19,6 +19,12 @@ Configure the database URL, application URL, Auth.js secret, university-domain G
 | `MINIO_ACCESS_KEY` | Access key | n/a |
 | `MINIO_SECRET_KEY` | Secret key | n/a |
 | `MAX_UPLOAD_BYTES` | Upload ceiling | `52428800` |
+| `EVENTS_URL` | Internal URL the app uses to publish events | `http://events:3001` |
+| `EVENTS_INTERNAL_TOKEN` | Shared secret for `POST /internal/publish`. Use a long random value. | n/a |
+| `EVENTS_PORT` | Port the events server listens on | `3001` |
+| `APP_INTERNAL_URL` | URL the events server uses to verify sessions (defaults to `APP_URL`) | `http://web:3000` |
+| `NEXT_PUBLIC_EVENTS_URL` | Browser-facing events URL, fixed at build time (Docker build argument). Empty means same origin. | `http://localhost:3001` |
+| `SMTP_USER` / `SMTP_PASSWORD` | Optional relay credentials | n/a |
 
 ## Rules
 
