@@ -5,6 +5,8 @@ import {
   DossierView,
 } from "@/features/defense/presentation/dossier-checklist";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDossiersPage() {
   const dossiers = await dossierRepository.findAll();
 

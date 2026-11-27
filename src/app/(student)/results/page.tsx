@@ -3,6 +3,8 @@ import { prisma } from "@/core/db/prisma";
 import { StatusBadge } from "@/core/ui/status-badge";
 import { Metric } from "@/core/ui/metric";
 
+export const dynamic = "force-dynamic";
+
 export default async function StudentResultsPage() {
   const student = await prisma.studentProfile.findFirst({
     include: {
